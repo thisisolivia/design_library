@@ -1,0 +1,3547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RISE Design Library</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── DESIGN TOKENS ─────────────────────────────── */
+    :root {
+      /* Brand */
+      --brand: #BF4646;
+      --brand-dark: #A03B3B;
+      --brand-light: #FCEAEA;
+      --brand-muted: #F5D8D8;
+
+      /* Surfaces */
+      --bg: #F8F5F4;
+      --surface: #FFFFFF;
+      --surface-2: #F4EFEE;
+      --surface-3: #EDE5E3;
+
+      /* Borders */
+      --border-1: #EAE1DF;
+      --border-2: #D6CAC8;
+
+      /* Text */
+      --text-1: #1A1110;
+      --text-2: #6B5B58;
+      --text-3: #9E8D8A;
+
+      /* Shadows */
+      --shadow-sm: 0 1px 3px rgba(28,17,16,0.06), 0 1px 2px rgba(28,17,16,0.04);
+      --shadow-md: 0 4px 16px rgba(28,17,16,0.09), 0 2px 4px rgba(28,17,16,0.04);
+      --shadow-lg: 0 12px 40px rgba(28,17,16,0.12), 0 4px 12px rgba(28,17,16,0.06);
+
+      /* Shape */
+      --r-sm: 8px;
+      --r-md: 12px;
+      --r-lg: 16px;
+      --r-xl: 20px;
+      --r-2xl: 28px;
+      --r-full: 9999px;
+
+      /* Type */
+      --font: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'Roboto Mono', monospace;
+
+      /* Motion */
+      --ease: cubic-bezier(0.2, 0, 0, 1);
+      --dur: 160ms;
+    }
+
+    /* ── RESET & BASE ──────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text-1);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HEADER ────────────────────────────────────── */
+    header {
+      background: rgba(255,255,255,0.90);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-1);
+      padding: 0 32px;
+      height: 58px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 20px;
+    }
+    .header-brand { display: flex; align-items: center; gap: 10px; }
+    .logo-mark {
+      width: 28px; height: 28px;
+      background: var(--brand);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .logo-mark svg { width: 14px; height: 14px; fill: white; }
+    .logo-text {
+      font-size: 14px; font-weight: 700;
+      color: var(--text-1);
+      letter-spacing: -0.3px;
+      white-space: nowrap;
+    }
+    .logo-text span { color: var(--brand); }
+    .header-search {
+      max-width: 380px; width: 100%;
+      justify-self: center;
+      position: relative;
+    }
+    .search-icon {
+      position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+      color: var(--text-3); pointer-events: none;
+      width: 15px; height: 15px;
+    }
+    .search-input {
+      width: 100%; height: 36px;
+      background: var(--surface-2);
+      border: 1px solid var(--border-1);
+      border-radius: var(--r-full);
+      padding: 0 14px 0 36px;
+      font-family: var(--font);
+      font-size: 13px; color: var(--text-1);
+      transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+      outline: none;
+    }
+    .search-input::placeholder { color: var(--text-3); }
+    .search-input:focus {
+      background: var(--surface);
+      border-color: var(--brand);
+      box-shadow: 0 0 0 3px rgba(191,70,70,0.12);
+    }
+    .header-meta { display: flex; align-items: center; gap: 8px; }
+    .badge {
+      background: var(--surface-2);
+      border: 1px solid var(--border-1);
+      color: var(--text-2);
+      font-size: 11px; font-weight: 600;
+      padding: 3px 10px;
+      border-radius: var(--r-full);
+      white-space: nowrap;
+    }
+
+    /* ── HERO ───────────────────────────────────────── */
+    .hero {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 52px 32px 28px;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+      color: var(--brand); margin-bottom: 16px;
+    }
+    .hero-eyebrow-dot {
+      width: 5px; height: 5px;
+      background: var(--brand); border-radius: 50%;
+      animation: blink 2.4s ease-in-out infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    .hero-title {
+      font-size: 38px; font-weight: 800;
+      color: var(--text-1);
+      letter-spacing: -1.2px;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+    .hero-desc {
+      font-size: 15px;
+      color: var(--text-2);
+      line-height: 1.7;
+      max-width: 440px;
+    }
+
+    /* ── FILTER BAR ─────────────────────────────────── */
+    .filter-section {
+      max-width: 1280px; margin: 0 auto;
+      padding: 0 32px 28px;
+    }
+    .filter-bar {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .filter-bar::-webkit-scrollbar { display: none; }
+    .chip {
+      display: inline-flex; align-items: center;
+      padding: 7px 16px;
+      border-radius: var(--r-full);
+      border: 1px solid var(--border-1);
+      background: var(--surface);
+      color: var(--text-2);
+      font-family: var(--font);
+      font-size: 12.5px; font-weight: 600;
+      cursor: pointer;
+      transition: all var(--dur) var(--ease);
+      white-space: nowrap;
+      letter-spacing: 0.1px;
+    }
+    .chip:hover {
+      background: var(--surface-2);
+      border-color: var(--border-2);
+      color: var(--text-1);
+    }
+    .chip.active {
+      background: var(--brand);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 2px 8px rgba(191,70,70,0.28);
+    }
+
+    /* ── MAIN GRID ─────────────────────────────────── */
+    main {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px 72px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 18px;
+    }
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 80px 24px;
+      color: var(--text-3);
+    }
+    .empty-state-icon { font-size: 36px; margin-bottom: 14px; opacity: 0.35; }
+    .empty-state p { font-size: 14px; line-height: 1.65; color: var(--text-2); }
+
+    /* ── CARD ──────────────────────────────────────── */
+    .card {
+      background: var(--surface);
+      border-radius: var(--r-xl);
+      border: 1px solid var(--border-1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition:
+        box-shadow var(--dur) var(--ease),
+        border-color var(--dur) var(--ease),
+        transform var(--dur) var(--ease);
+    }
+    .card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: var(--border-2);
+      transform: translateY(-2px);
+    }
+
+    /* Preview area */
+    .card-preview {
+      position: relative;
+      height: 216px;
+      background: var(--bg);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .card-preview iframe {
+      border: none;
+      pointer-events: none;
+      position: absolute;
+      width: 125%;
+      height: 360px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      transform-origin: center center;
+    }
+    .preview-overlay {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(15,8,7,0.28);
+      opacity: 0;
+      transition: opacity var(--dur) var(--ease);
+    }
+    .card:hover .preview-overlay { opacity: 1; }
+    .preview-btn {
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.32);
+      border-radius: var(--r-full);
+      color: #fff;
+      font-family: var(--font);
+      font-size: 13px; font-weight: 600;
+      padding: 9px 22px;
+      cursor: pointer;
+      letter-spacing: 0.1px;
+    }
+
+    /* Card body */
+    .card-body {
+      padding: 15px 17px 17px;
+      flex: 1; display: flex; flex-direction: column; gap: 8px;
+      border-top: 1px solid var(--border-1);
+    }
+    .card-header-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+    .card-title { font-size: 13.5px; font-weight: 700; color: var(--text-1); line-height: 1.3; letter-spacing: -0.1px; }
+    .cat-chip {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: var(--r-full);
+      white-space: nowrap;
+      flex-shrink: 0;
+      line-height: 1.6;
+    }
+    .card-desc { font-size: 12.5px; color: var(--text-2); line-height: 1.6; flex: 1; }
+    .card-footer { display: flex; align-items: center; justify-content: flex-end; padding-top: 2px; }
+    .view-btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-family: var(--font);
+      font-size: 12px; font-weight: 700;
+      color: var(--brand);
+      background: var(--brand-light);
+      border: none;
+      border-radius: var(--r-full);
+      padding: 5px 12px;
+      cursor: pointer;
+      transition: background var(--dur) var(--ease);
+      letter-spacing: 0.1px;
+    }
+    .view-btn:hover { background: var(--brand-muted); }
+
+    /* Category colours */
+    .cat-transition  { background: rgba(59,130,246,0.09);  color: #1D4ED8; }
+    .cat-animation   { background: rgba(124,58,237,0.09);  color: #6D28D9; }
+    .cat-interaction { background: rgba(16,185,129,0.09);  color: #047857; }
+    .cat-layout      { background: rgba(217,119,6,0.09);   color: #92400E; }
+    .cat-other       { background: rgba(107,114,128,0.09); color: #374151; }
+
+    /* ── BUTTONS ───────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 7px 16px;
+      border-radius: var(--r-full);
+      font-family: var(--font);
+      font-size: 13px; font-weight: 600;
+      cursor: pointer;
+      transition: all var(--dur) var(--ease);
+      border: none;
+      text-decoration: none;
+      letter-spacing: 0.1px;
+    }
+    .btn-tonal {
+      background: var(--surface-2);
+      color: var(--text-1);
+      border: 1px solid var(--border-1);
+    }
+    .btn-tonal:hover { background: var(--surface-3); border-color: var(--border-2); }
+    .btn-icon {
+      background: transparent;
+      border: 1px solid var(--border-1);
+      color: var(--text-2);
+      padding: 7px 10px;
+      border-radius: var(--r-full);
+      font-size: 14px; line-height: 1;
+    }
+    .btn-icon:hover { background: var(--surface-2); border-color: var(--border-2); }
+
+    /* ── MODAL ─────────────────────────────────────── */
+    .modal-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(15,8,7,0.50);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 200;
+      display: flex; align-items: center; justify-content: center;
+      padding: 16px;
+      opacity: 0; pointer-events: none;
+      transition: opacity var(--dur) var(--ease);
+    }
+    .modal-backdrop.open { opacity: 1; pointer-events: all; }
+    .modal {
+      background: var(--surface);
+      border-radius: var(--r-2xl);
+      border: 1px solid var(--border-1);
+      box-shadow: var(--shadow-lg);
+      width: 100%; max-width: 880px;
+      max-height: 90vh;
+      display: flex; flex-direction: column;
+      transform: translateY(16px) scale(0.98);
+      transition: transform 240ms cubic-bezier(0.34, 1.56, 0.64, 1);
+      overflow: hidden;
+    }
+    .modal-backdrop.open .modal { transform: translateY(0) scale(1); }
+    .modal-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border-1);
+      flex-shrink: 0;
+    }
+    .modal-title { font-size: 15px; font-weight: 700; letter-spacing: -0.2px; color: var(--text-1); }
+    .modal-body { display: flex; flex-direction: column; overflow: hidden; flex: 1; }
+    .modal-preview {
+      height: 390px; flex-shrink: 0;
+      border-bottom: 1px solid var(--border-1);
+      background: var(--bg);
+      position: relative;
+    }
+    .modal-preview iframe { width: 100%; height: 100%; border: none; }
+    .modal-code-section { display: flex; flex-direction: column; flex: 1; overflow: hidden; }
+    .modal-code-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 24px;
+      border-bottom: 1px solid var(--border-1);
+      flex-shrink: 0;
+      background: var(--surface);
+    }
+    .modal-code-label { font-size: 13px; font-weight: 500; color: var(--text-2); }
+    .code-block {
+      flex: 1; overflow-y: auto;
+      padding: 20px 24px;
+      background: var(--surface-3);
+    }
+    .code-block pre {
+      font-family: var(--font-mono);
+      font-size: 12.5px;
+      line-height: 1.75;
+      color: var(--text-1);
+      white-space: pre;
+      overflow-x: auto;
+    }
+    .copy-success { color: #059669; font-size: 13px; font-weight: 600; }
+
+    /* ── MODAL TABS ────────────────────────────────── */
+    .modal-tabs { display: flex; gap: 2px; }
+    .modal-tab {
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      padding: 4px 12px;
+      font-family: var(--font);
+      font-size: 13px; font-weight: 600;
+      color: var(--text-2);
+      cursor: pointer;
+      transition: all var(--dur) var(--ease);
+    }
+    .modal-tab.active {
+      color: var(--brand);
+      border-bottom-color: var(--brand);
+    }
+    .instructions-block {
+      display: none;
+      flex: 1; overflow-y: auto;
+      padding: 20px 24px;
+      background: var(--surface-3);
+      flex-direction: column; gap: 20px;
+    }
+    .instructions-block.visible { display: flex; }
+    .instr-section { display: flex; flex-direction: column; gap: 6px; }
+    .instr-title { font-size: 13px; font-weight: 700; color: var(--text-1); }
+    .instr-desc  { font-size: 13px; color: var(--text-2); line-height: 1.55; }
+    .instr-example {
+      background: var(--surface-2);
+      border: 1px solid var(--border-1);
+      border-radius: var(--r-sm);
+      padding: 10px 14px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-1);
+      line-height: 1.7;
+    }
+    .instr-example code { font-family: inherit; }
+
+
+
+    /* ── SCROLLBAR ─────────────────────────────────── */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 3px; }
+
+    /* ── RESPONSIVE ────────────────────────────────── */
+    @media (max-width: 640px) {
+      header { padding: 0 16px; grid-template-columns: auto 1fr; }
+      .header-meta { display: none; }
+      .header-search { max-width: none; }
+      .hero, .filter-section, main { padding-left: 16px; padding-right: 16px; }
+      .hero-title { font-size: 28px; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-brand">
+      <div class="logo-mark">
+        <svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+          <rect x="1" y="1" width="5" height="5" rx="1.5"/>
+          <rect x="8" y="1" width="5" height="5" rx="1.5"/>
+          <rect x="1" y="8" width="5" height="5" rx="1.5"/>
+          <rect x="8" y="8" width="5" height="3" rx="1.5"/>
+        </svg>
+      </div>
+      <span class="logo-text">RISE <span>Design Library</span></span>
+    </div>
+    <div class="header-search">
+      <svg class="search-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="7" cy="7" r="4.5" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M10.5 10.5L13.5 13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <input type="text" class="search-input" id="search-input" placeholder="Search blocks…" autocomplete="off">
+    </div>
+    <div class="header-meta">
+      <span class="badge" id="badge-count">0 blocks</span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span>Articulate RISE</div>
+    <h1 class="hero-title">Ready-to-use<br>HTML code blocks</h1>
+    <p class="hero-desc">Copy, paste, and publish — no coding required. Built for L&amp;D teams using Articulate RISE.</p>
+  </div>
+
+  <!-- FILTER BAR -->
+  <div class="filter-section">
+    <div class="filter-bar" id="filter-bar">
+      <button class="chip active" data-filter="all">All</button>
+      <button class="chip" data-filter="transition">Transition</button>
+      <button class="chip" data-filter="animation">Animation</button>
+      <button class="chip" data-filter="interaction">Interaction</button>
+      <button class="chip" data-filter="other">Other</button>
+    </div>
+  </div>
+
+  <!-- MAIN GRID -->
+  <main>
+    <div class="grid" id="grid"></div>
+  </main>
+
+  <!-- VIEW CODE MODAL -->
+  <div class="modal-backdrop" id="view-modal" onclick="handleBackdropClick(event, 'view-modal')">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title" id="modal-title">Block Name</span>
+        <button class="btn btn-icon" onclick="closeModal('view-modal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-preview">
+          <iframe id="modal-iframe" title="Preview"></iframe>
+        </div>
+        <div class="modal-code-section">
+          <div class="modal-code-header">
+            <div class="modal-tabs">
+              <button class="modal-tab active" onclick="switchTab('code')">HTML</button>
+              <button class="modal-tab" onclick="switchTab('instructions')">Instructions</button>
+            </div>
+            <button class="btn btn-tonal" id="copy-btn" onclick="copyCode()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><rect x="9" y="9" width="13" height="13" rx="2" stroke="currentColor" stroke-width="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              Copy Code
+            </button>
+          </div>
+          <div class="code-block" id="tab-code">
+            <pre id="modal-code"></pre>
+          </div>
+          <div class="instructions-block" id="tab-instructions"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script>
+    // ── DATA ──────────────────────────────────────────────────────────────────
+    const SEED_BLOCKS = [
+      {
+        id: 'seed-1',
+        title: 'Scallop Divider',
+        category: 'transition',
+        description: 'A scalloped bottom edge to transition between sections. Paste at the end of a content block.',
+        code: `<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+  /* ============================================
+     CUSTOMIZE HERE
+     ============================================ */
+
+  :root {
+    --scallop-color: #547792; /* ✏️ Scallop color */
+    --scallop-size:  48px;    /* ✏️ Radius of each bump — bigger = larger scallops */
+    --solid-height:  32px;    /* ✏️ Height of the solid strip above the bumps */
+    /* 💡 The background behind the scallop is transparent —
+          it will automatically show your RISE block background color */
+  }
+
+  /* ============================================
+     DO NOT EDIT BELOW THIS LINE
+     ============================================ */
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: transparent;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+  }
+
+  .scallop {
+    width: 100%;
+    height: calc(var(--scallop-size) + var(--solid-height));
+    background:
+      radial-gradient(
+        circle at 50% 100%,
+        transparent calc(var(--scallop-size) - 0.5px),
+        var(--scallop-color) var(--scallop-size)
+      )
+      center bottom / calc(var(--scallop-size) * 2) calc(var(--scallop-size) + var(--solid-height))
+      repeat-x,
+
+      linear-gradient(
+        to bottom,
+        var(--scallop-color) var(--solid-height),
+        transparent var(--solid-height)
+      );
+  }
+
+</style>
+</head>
+<body>
+  <div class="scallop"></div>
+</body>
+</html>`
+      },
+      {
+        id: 'seed-2',
+        title: 'Animated Wave',
+        category: 'transition',
+        description: 'A smoothly animated wave edge to transition between sections.',
+        code: `<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+  /* ============================================
+     CUSTOMIZE HERE
+     ============================================ */
+
+  :root {
+    --wave-color:  #547792; /* ✏️ Wave color */
+    --wave-height: 260px;   /* ✏️ Height of the wave block */
+    --wave-speed:  6s;      /* ✏️ Animation speed — lower = faster */
+    /* 💡 The background behind the wave is transparent —
+          it will automatically show your RISE block background color */
+  }
+
+  /* ============================================
+     DO NOT EDIT BELOW THIS LINE
+     ============================================ */
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: transparent; /* The area behind the wave shows your RISE page background automatically */
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .wave-container {
+    position: relative;
+    width: 100%;
+    height: var(--wave-height);
+    overflow: hidden;
+  }
+
+  svg.wave {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 100%;
+  }
+
+  .wave-path {
+    fill: var(--wave-color);
+    animation: waveShift var(--wave-speed) ease-in-out infinite alternate;
+    transform-origin: center bottom;
+  }
+
+  @keyframes waveShift {
+    0%   { d: path("M0,260 L0,120 C200,60 400,180 600,110 C800,40 1000,160 1200,100 C1400,40 1500,130 1512,120 L1512,260 Z"); }
+    50%  { d: path("M0,260 L0,140 C200,80 400,160 600,90 C800,20 1000,150 1200,90 C1400,30 1500,120 1512,110 L1512,260 Z"); }
+    100% { d: path("M0,260 L0,100 C200,150 400,60 600,130 C800,190 1000,80 1200,140 C1400,190 1500,110 1512,130 L1512,260 Z"); }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="wave-container">
+  <svg class="wave" viewBox="0 0 1512 260" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path class="wave-path"
+      d="M0,260 L0,120 C200,60 400,180 600,110 C800,40 1000,160 1200,100 C1400,40 1500,130 1512,120 L1512,260 Z"/>
+  </svg>
+</div>
+
+</body>
+</html>`
+      },
+      {
+        id: 'seed-3',
+        title: 'Flip Card Interaction',
+        category: 'interaction',
+        description: 'Hover to preview the back, tap to lock it in place. Perfect for term definitions.',
+        instructions: [
+          {
+            title: 'Add a new card',
+            desc: 'Copy the object below and paste it inside the <code>CARDS</code> array. Separate each card with a comma.',
+            example: `{ term: 'Your Term', def: 'Your definition here.' },`,
+          },
+          {
+            title: 'Bold text on the back',
+            desc: 'Wrap any word or phrase with <code>&lt;strong&gt;</code> tags inside the <code>def</code> value.',
+            example: `def: 'The &lt;strong&gt;key concept&lt;/strong&gt; explained here.'`,
+          },
+          {
+            title: 'Bullet list on the back',
+            desc: 'Use an <code>&lt;ul&gt;</code> / <code>&lt;li&gt;</code> list inside the <code>def</code> value.',
+            example: `def: '&lt;ul&gt;&lt;li&gt;First point&lt;/li&gt;&lt;li&gt;Second point&lt;/li&gt;&lt;/ul&gt;'`,
+          },
+          {
+            title: 'Remove a card',
+            desc: 'Delete the entire <code>{ term: …, def: … }</code> object from the array, including its trailing comma.',
+          },
+        ],
+        code: `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script>
+
+  /* ============================================
+     CUSTOMIZE HERE
+     ============================================ */
+
+  const FONT       = 'Lato';    // ✏️ Google Font name (or blank for system font)
+  const TERM_SIZE  = '22px';    // ✏️ Term (front) font size
+  const DEF_SIZE   = '14px';    // ✏️ Definition (back) font size
+
+  const PAGE_BG    = '#ffffff'; // ✏️ Page background color
+  const CARD_FRONT = '#547792'; // ✏️ Front of card color
+  const CARD_BACK  = '#ffffff'; // ✏️ Back of card color
+  const TERM_COLOR = '#ffffff'; // ✏️ Term text color (front)
+  const DEF_COLOR  = '#444444'; // ✏️ Definition text color (back)
+  const CARD_W     = '280px';   // ✏️ Card width
+  const CARD_H     = '180px';   // ✏️ Card height
+
+  const CARDS = [               // ✏️ Add, remove, or edit cards below
+    {
+      term: 'Instructional Design',
+      def:  'The systematic process of developing <strong>educational experiences</strong> that make learning effective, efficient, and engaging.',
+    },
+    // {
+    //   term: 'Your Term Here',
+    //   def:  'Your definition here. Use <strong>bold</strong> to highlight key words.',
+    // },
+  ];
+
+  /* ============================================ */
+
+  if (FONT) {
+    const link = document.createElement('link');
+    link.rel  = 'stylesheet';
+    link.href = 'https://fonts.googleapis.com/css2?family=' + FONT.replace(/ /g, '+') + ':wght@400;700&display=swap';
+    document.head.appendChild(link);
+  }
+  const s = document.documentElement.style;
+  s.setProperty('--font',        FONT ? "'" + FONT + "', sans-serif" : 'system-ui, sans-serif');
+  s.setProperty('--term-size',   TERM_SIZE);
+  s.setProperty('--def-size',    DEF_SIZE);
+  s.setProperty('--page-bg',     PAGE_BG);
+  s.setProperty('--card-front',  CARD_FRONT);
+  s.setProperty('--card-back',   CARD_BACK);
+  s.setProperty('--term-color',  TERM_COLOR);
+  s.setProperty('--def-color',   DEF_COLOR);
+  s.setProperty('--card-width',  CARD_W);
+  s.setProperty('--card-height', CARD_H);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('cards');
+    CARDS.forEach(c => {
+      const scene = document.createElement('div');
+      scene.className = 'scene';
+      scene.innerHTML = \`
+        <div class="card">
+          <div class="face front">
+            <div class="term">\${c.term}</div>
+          </div>
+          <div class="face back">
+            <div class="def">\${c.def}</div>
+          </div>
+        </div>\`;
+      scene.addEventListener('click', () => scene.classList.toggle('flipped'));
+      container.appendChild(scene);
+    });
+  });
+
+<\/script>
+<style>
+
+  /* ============================================
+     DO NOT EDIT BELOW THIS LINE
+     ============================================ */
+
+  body { margin: 0; font-family: var(--font); background: var(--page-bg); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 24px; min-height: 100vh; box-sizing: border-box; }
+  #cards { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; max-width: calc(var(--card-width) * 3 + 24px * 2); }
+  .scene { width: var(--card-width); height: var(--card-height); perspective: 800px; cursor: pointer; }
+  .card { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+  .scene:hover .card, .scene.flipped .card { transform: rotateY(180deg); }
+  .face {
+    position: absolute; inset: 0;
+    border-radius: 20px; overflow-y: auto;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 0 28px; text-align: center; backface-visibility: hidden;
+  }
+  .face::before, .face::after { content: ''; flex: 1 0 28px; }
+  .front { background: var(--card-front); color: var(--term-color); }
+  .front .term  { font-size: var(--term-size); font-weight: 700; }
+  .back  { background: var(--card-back); box-shadow: 0 4px 24px rgba(103,80,164,0.2); transform: rotateY(180deg); }
+  .back  .def   { font-size: var(--def-size); line-height: 1.6; color: var(--def-color); }
+  .back  ul     { list-style: disc; padding-left: 20px; text-align: left; margin: 0; }
+  .back  ul li  { margin-bottom: 6px; }
+</style>
+</head>
+<body>
+  <div id="cards"></div>
+</body>
+</html>`
+      },
+      {
+        id: 'seed-6',
+        title: 'Typewriter — Phrase Loop',
+        category: 'animation',
+        description: 'Cycles through phrases with a typing animation. Great for intros, role titles, or key messages.',
+        code: `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script>
+
+  /* ============================================
+     CUSTOMIZE HERE
+     ============================================ */
+
+  const FONT         = 'Lato';    // ✏️ Google Font name (or blank for system font)
+  const FONT_SIZE    = '32px';    // ✏️ Text size
+  const BOLD         = true;      // ✏️ true = bold, false = normal weight
+  const TEXT_COLOR   = '#221A19'; // ✏️ Static text color
+  const TYPED_COLOR  = '#547792'; // ✏️ Typed phrase color
+  const CURSOR_COLOR = '#547792'; // ✏️ Cursor color
+
+  const PREFIX = 'I am a ';       // ✏️ Static text before the typed phrase ('' to hide)
+
+  const PHRASES = [               // ✏️ Phrases to cycle through
+    'Instructional Designer',
+    'eLearning Developer',
+    'Visual Storyteller',
+  ];
+
+  const TYPE_SPEED   = 80;        // ✏️ ms per character (typing)
+  const DELETE_SPEED = 40;        // ✏️ ms per character (deleting)
+  const PAUSE_AFTER  = 1800;      // ✏️ ms pause after fully typed
+  const PAUSE_BEFORE = 400;       // ✏️ ms pause before next phrase
+
+  /* ============================================ */
+
+  if (FONT) {
+    const link = document.createElement('link');
+    link.rel  = 'stylesheet';
+    link.href = 'https://fonts.googleapis.com/css2?family=' + FONT.replace(/ /g, '+') + ':wght@400;700&display=swap';
+    document.head.appendChild(link);
+  }
+  const s = document.documentElement.style;
+  s.setProperty('--font',         FONT ? "'" + FONT + "', sans-serif" : 'system-ui, sans-serif');
+  s.setProperty('--font-size',    FONT_SIZE);
+  s.setProperty('--font-weight',  BOLD ? '700' : '400');
+  s.setProperty('--text-color',   TEXT_COLOR);
+  s.setProperty('--typed-color',  TYPED_COLOR);
+  s.setProperty('--cursor-color', CURSOR_COLOR);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('prefix').textContent = PREFIX;
+    const el = document.getElementById('typed');
+    let phraseIndex = 0, charIndex = 0, deleting = false;
+    function tick() {
+      const current = PHRASES[phraseIndex];
+      if (!deleting) {
+        el.textContent = current.slice(0, ++charIndex);
+        if (charIndex === current.length) { deleting = true; setTimeout(tick, PAUSE_AFTER); return; }
+      } else {
+        el.textContent = current.slice(0, --charIndex);
+        if (charIndex === 0) { deleting = false; phraseIndex = (phraseIndex + 1) % PHRASES.length; setTimeout(tick, PAUSE_BEFORE); return; }
+      }
+      setTimeout(tick, deleting ? DELETE_SPEED : TYPE_SPEED);
+    }
+    tick();
+  });
+
+<\/script>
+<style>
+
+  /* ============================================
+     DO NOT EDIT BELOW THIS LINE
+     ============================================ */
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: transparent;
+    font-family: var(--font);
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh; padding: 40px 24px; box-sizing: border-box;
+  }
+  .typewriter-wrap {
+    text-align: center;
+    font-size: var(--font-size); font-weight: var(--font-weight);
+    color: var(--text-color); line-height: 1.5;
+  }
+  .typed { color: var(--typed-color); }
+  .cursor {
+    display: inline-block; width: 3px; height: 0.85em;
+    background: var(--cursor-color); margin-left: 3px;
+    vertical-align: middle; animation: blink 0.7s step-end infinite;
+  }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+</style>
+</head>
+<body>
+
+<div class="typewriter-wrap">
+  <span id="prefix"></span><span class="typed" id="typed"></span><span class="cursor"></span>
+</div>
+
+</body>
+</html>`,
+      },
+      {
+        id: 'seed-7',
+        title: 'Typewriter — Full Text',
+        category: 'animation',
+        description: 'Types through all your content sequentially — no deletion, no cycling. Edit text directly in the HTML.',
+        code: `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script>
+
+  /* ============================================
+     CUSTOMIZE HERE
+     ============================================ */
+
+  const FONT        = 'Lato';    // ✏️ Google Font name (or blank for system font)
+  const FONT_SIZE   = '20px';    // ✏️ Text size
+  const BOLD        = false;     // ✏️ true = bold, false = normal weight
+  const LINE_HEIGHT = '1.8';     // ✏️ Line spacing
+  const MAX_WIDTH   = '700px';   // ✏️ Max content width
+  const TEXT_COLOR   = '#221A19'; // ✏️ Text color
+  const CURSOR_COLOR = '#547792'; // ✏️ Cursor color
+
+  const LINES = [                 // ✏️ Lines to type — use '' for a paragraph break
+    "Hello! I'm an Instructional Designer.",
+    "I create engaging eLearning experiences",
+    "that make learning stick.",
+    "",
+    "My work lives at the intersection",
+    "of education, design, and technology.",
+  ];
+
+  const TYPE_SPEED = 60;          // ✏️ ms per character
+  const PAUSE_LINE = 400;         // ✏️ ms pause after each line
+  const LOOP       = true;        // ✏️ loop back to start when done
+
+  /* ============================================ */
+
+  if (FONT) {
+    const link = document.createElement('link');
+    link.rel  = 'stylesheet';
+    link.href = 'https://fonts.googleapis.com/css2?family=' + FONT.replace(/ /g, '+') + ':wght@400;700&display=swap';
+    document.head.appendChild(link);
+  }
+  const s = document.documentElement.style;
+  s.setProperty('--font',         FONT ? "'" + FONT + "', sans-serif" : 'system-ui, sans-serif');
+  s.setProperty('--font-size',    FONT_SIZE);
+  s.setProperty('--font-weight',  BOLD ? '700' : '400');
+  s.setProperty('--line-height',  LINE_HEIGHT);
+  s.setProperty('--max-width',    MAX_WIDTH);
+  s.setProperty('--text-color',   TEXT_COLOR);
+  s.setProperty('--cursor-color', CURSOR_COLOR);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const output = document.getElementById('output');
+    let lineIndex = 0, charIndex = 0;
+    let wait = 0, lastTs = null;
+
+    function tick(ts) {
+      const delta = lastTs === null ? 0 : Math.min(ts - lastTs, 200);
+      lastTs = ts;
+      wait -= delta;
+      if (wait > 0) { requestAnimationFrame(tick); return; }
+
+      if (lineIndex >= LINES.length) {
+        if (LOOP) {
+          output.innerHTML = '';
+          lineIndex = 0; charIndex = 0;
+          wait = 1500;
+          requestAnimationFrame(tick);
+        }
+        return;
+      }
+
+      const line = LINES[lineIndex];
+      if (charIndex < line.length) {
+        output.innerHTML += line[charIndex++];
+        wait = TYPE_SPEED;
+      } else {
+        output.innerHTML += line === '' ? '<br><br>' : '<br>';
+        lineIndex++; charIndex = 0;
+        wait = line === '' ? PAUSE_LINE * 2 : PAUSE_LINE;
+      }
+      requestAnimationFrame(tick);
+    }
+
+    requestAnimationFrame(tick);
+  });
+
+<\/script>
+<style>
+
+  /* ============================================
+     DO NOT EDIT BELOW THIS LINE
+     ============================================ */
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: transparent; font-family: var(--font);
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh; padding: 40px 24px;
+  }
+  .typewriter-wrap {
+    font-size: var(--font-size); font-weight: var(--font-weight);
+    color: var(--text-color); line-height: var(--line-height);
+    max-width: var(--max-width); width: 100%;
+  }
+  .cursor {
+    display: inline-block; width: 2px; height: 0.9em;
+    background: var(--cursor-color); margin-left: 2px;
+    vertical-align: middle; animation: blink 0.7s step-end infinite;
+  }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+</style>
+</head>
+<body>
+
+<div class="typewriter-wrap">
+  <span id="output"></span><span class="cursor" id="cursor"></span>
+</div>
+
+</body>
+</html>`,
+      },
+      {
+        id: 'seed-8',
+        title: 'Diagonal Split',
+        category: 'transition',
+        description: 'A diagonal cut that splits the block into a colored triangle and a transparent area. Great for section transitions.',
+        code: `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+  /* ============================================
+     CUSTOMIZE HERE
+     ============================================ */
+
+  :root {
+    --color:  #547792; /* ✏️ Triangle color */
+    --height: 150px;   /* ✏️ Block height */
+    /* 💡 The transparent half will automatically show
+          your RISE block background color */
+  }
+
+  /* ============================================
+     DO NOT EDIT BELOW THIS LINE
+     ============================================ */
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: transparent; }
+
+  .rect-container {
+    position: relative;
+    width: 100%;
+    height: var(--height);
+    overflow: hidden;
+    background-color: transparent;
+  }
+
+  svg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: transparent;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="rect-container">
+  <svg viewBox="0 0 1 1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <polygon points="0,0 1,0 0,1" fill="var(--color)" />
+    <polygon points="1,0 1,1 0,1" fill="transparent" />
+  </svg>
+</div>
+
+</body>
+</html>`,
+      },
+      {
+        id: 'seed-9',
+        title: 'Zigzag Edge',
+        category: 'transition',
+        description: 'A sharp zigzag bottom edge to transition between sections. Paste at the end of a content block.',
+        code: `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+
+  /* ============================================
+     CUSTOMIZE HERE
+     ============================================ */
+
+  :root {
+    --color:  #547792; /* ✏️ Zigzag color */
+    --height: 80px;    /* ✏️ Block height */
+    /* 💡 The transparent area below will automatically show
+          your RISE block background color */
+  }
+
+  /* ============================================
+     DO NOT EDIT BELOW THIS LINE
+     ============================================ */
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: transparent; }
+
+  .container {
+    width: 100%;
+    height: var(--height);
+    overflow: hidden;
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="container">
+  <svg viewBox="0 0 1200 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="0,0 1200,0 1200,100 1175,50 1150,100 1125,50 1100,100 1075,50 1050,100 1025,50 1000,100 975,50 950,100 925,50 900,100 875,50 850,100 825,50 800,100 775,50 750,100 725,50 700,100 675,50 650,100 625,50 600,100 575,50 550,100 525,50 500,100 475,50 450,100 425,50 400,100 375,50 350,100 325,50 300,100 275,50 250,100 225,50 200,100 175,50 150,100 125,50 100,100 75,50 50,100 25,50 0,100" fill="var(--color)"/>
+  </svg>
+</div>
+
+</body>
+</html>`,
+      },
+      {
+        id: 'seed-10',
+        title: 'Staircase Edge',
+        category: 'transition',
+        description: 'A diagonal staircase edge — like the diagonal split but with clean rectangular steps.',
+        code: `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+
+  /* ============================================
+     CUSTOMIZE HERE
+     ============================================ */
+
+  :root {
+    --color:  #547792; /* ✏️ Color */
+    --height: 100px;   /* ✏️ Block height */
+    /* 💡 The transparent area will automatically show
+          your RISE block background color */
+  }
+
+  /* ============================================
+     DO NOT EDIT BELOW THIS LINE
+     ============================================ */
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: transparent; }
+
+  .container {
+    width: 100%;
+    height: var(--height);
+    overflow: hidden;
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="container">
+  <svg viewBox="0 0 1200 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="0,0 1200,0 1200,100 1050,100 1050,87.5 900,87.5 900,75 750,75 750,62.5 600,62.5 600,50 450,50 450,37.5 300,37.5 300,25 150,25 150,12.5 0,12.5" fill="var(--color)"/>
+  </svg>
+</div>
+
+</body>
+</html>`,
+      },
+      {
+        id: 'seed-13',
+        title: 'Layered Waves',
+        category: 'transition',
+        description: 'Multiple wave layers stacked with depth — creates a rich, layered transition between sections.',
+        code: `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+
+  /* ============================================
+     CUSTOMIZE HERE
+     ============================================ */
+
+  :root {
+    --color:  #547792; /* ✏️ Wave color */
+    --height: 200px;   /* ✏️ Block height */
+    /* 💡 The transparent area above will automatically show
+          your RISE block background color */
+  }
+
+  /* ============================================
+     DO NOT EDIT BELOW THIS LINE
+     ============================================ */
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: transparent; }
+
+  .container {
+    width: 100%;
+    height: var(--height);
+    overflow: hidden;
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="container">
+  <svg viewBox="0 0 1440 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,70 C200,20 400,120 600,70 C800,20 1000,110 1200,60 C1320,30 1440,70 1440,70 L1440,200 L0,200 Z"
+          fill="var(--color)" opacity="0.35"/>
+    <path d="M0,100 C180,65 350,130 550,95 C750,60 950,130 1150,95 C1300,70 1440,100 1440,100 L1440,200 L0,200 Z"
+          fill="var(--color)" opacity="0.55"/>
+    <path d="M0,130 C200,105 400,155 650,125 C850,100 1100,150 1300,125 C1380,110 1440,130 1440,130 L1440,200 L0,200 Z"
+          fill="var(--color)" opacity="0.75"/>
+    <path d="M0,160 C250,140 500,172 750,155 C1000,138 1200,165 1440,155 L1440,200 L0,200 Z"
+          fill="var(--color)" opacity="1"/>
+  </svg>
+</div>
+
+</body>
+</html>`,
+      },
+      {
+        id: 'seed-15',
+        title: 'Aurora Gradient',
+        category: 'interaction',
+        description: 'A silky mesh gradient that shifts with the mouse cursor — purple-to-gold aurora effect, smoothly interpolated.',
+        code: `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script>
+
+  /* ============================================
+     CUSTOMIZE HERE
+     ============================================ */
+
+  const COLOR_A = '#C4B5FD';          // ✏️ Left/cool color  (purple)
+  const COLOR_B = '#FDE68A';          // ✏️ Right/warm color (gold)
+  const COLOR_C = '#FCA5A5';          // ✏️ Accent color     (rose)
+  const BASE    = '#D8B4FE';          // ✏️ Base fallback color
+  const HEIGHT  = '320px';            // ✏️ Block height
+
+  const LABEL      = 'Move your cursor'; // ✏️ Small label above
+  const TITLE      = 'Aurora Gradient';  // ✏️ Main heading
+  const FONT       = 'Playfair Display'; // ✏️ Any Google Fonts name (or leave blank for system font)
+  const TITLE_SIZE = '46px';            // ✏️ Title font size
+  const LABEL_SIZE = '11px';            // ✏️ Label font size
+
+  /* ============================================ */
+
+  // Auto-load Google Font if specified
+  if (FONT) {
+    const link = document.createElement('link');
+    link.rel  = 'stylesheet';
+    link.href = 'https://fonts.googleapis.com/css2?family=' + FONT.replace(/ /g, '+') + ':wght@400;700&display=swap';
+    document.head.appendChild(link);
+  }
+
+  // Apply CSS variables before first paint (no flash)
+  const s = document.documentElement.style;
+  s.setProperty('--color-a',    COLOR_A);
+  s.setProperty('--color-b',    COLOR_B);
+  s.setProperty('--color-c',    COLOR_C);
+  s.setProperty('--base',       BASE);
+  s.setProperty('--height',     HEIGHT);
+  s.setProperty('--font',       FONT || '-apple-system, BlinkMacSystemFont, sans-serif');
+  s.setProperty('--title-size', TITLE_SIZE);
+  s.setProperty('--label-size', LABEL_SIZE);
+
+<\/script>
+<style>
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; overflow: hidden; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: transparent;
+    display: flex; align-items: center; justify-content: center;
+    min-height: var(--height);
+  }
+  .aurora {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 80% at var(--px, 20%) var(--py, 50%), var(--color-a) 0%, transparent 65%),
+      radial-gradient(ellipse 70% 80% at calc(100% - var(--px, 20%)) calc(100% - var(--py, 50%)), var(--color-b) 0%, transparent 65%),
+      radial-gradient(ellipse 60% 60% at 65% 55%, var(--color-c) 0%, transparent 60%),
+      var(--base);
+    pointer-events: none;
+  }
+  .content {
+    position: relative; z-index: 1;
+    text-align: center;
+    color: rgba(40, 0, 80, 0.65);
+    padding: 40px 24px;
+    font-family: var(--font);
+    user-select: none; pointer-events: none;
+  }
+  .label {
+    font-size: var(--label-size); font-weight: 600;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    opacity: 0.55; margin-bottom: 10px;
+  }
+  .title {
+    font-size: var(--title-size);
+    font-weight: 700; letter-spacing: -0.5px; line-height: 1.1;
+  }
+
+</style>
+</head>
+<body>
+
+  <div class="aurora" id="aurora"></div>
+  <div class="content">
+    <div class="label" id="t-label"></div>
+    <div class="title" id="t-title"></div>
+  </div>
+
+<script>
+  document.getElementById('t-label').textContent = LABEL;
+  document.getElementById('t-title').textContent = TITLE;
+
+  const el = document.getElementById('aurora');
+  let cx = 20, cy = 50, tx = 20, ty = 50;
+
+  document.addEventListener('mousemove', e => {
+    tx = e.clientX / window.innerWidth  * 100;
+    ty = e.clientY / window.innerHeight * 100;
+  });
+
+  (function animate() {
+    cx += (tx - cx) * 0.06;
+    cy += (ty - cy) * 0.06;
+    el.style.setProperty('--px', cx.toFixed(2) + '%');
+    el.style.setProperty('--py', cy.toFixed(2) + '%');
+    requestAnimationFrame(animate);
+  })();
+<\/script>
+
+</body>
+</html>`,
+      },
+      {
+        id: 'seed-11',
+        title: 'Blob Edge',
+        category: 'transition',
+        description: 'A smooth, organic curved bottom edge for a soft, modern transition between sections.',
+        code: `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+
+  /* ============================================
+     CUSTOMIZE HERE
+     ============================================ */
+
+  :root {
+    --color:  #547792; /* ✏️ Color */
+    --height: 100px;   /* ✏️ Block height */
+    /* 💡 The transparent area below will automatically show
+          your RISE block background color */
+  }
+
+  /* ============================================
+     DO NOT EDIT BELOW THIS LINE
+     ============================================ */
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: transparent; }
+
+  .container {
+    width: 100%;
+    height: var(--height);
+    overflow: hidden;
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="container">
+  <svg viewBox="0 0 1200 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,0 L1200,0 L1200,45 C1050,95 900,10 750,60 C600,100 450,15 300,55 C150,90 75,25 0,50 Z" fill="var(--color)"/>
+  </svg>
+</div>
+
+</body>
+</html>`,
+      },
+      {
+        id: 'seed-5',
+        title: 'Before / After Slider',
+        category: 'interaction',
+        description: 'Drag to compare two images side by side. Great for showcasing transformations or changes.',
+        code: `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+
+  /* ============================================
+     CUSTOMIZE HERE
+     ============================================ */
+
+  const BEFORE_IMG   = 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1200'; // ✏️ Before image URL
+  const AFTER_IMG    = 'https://images.unsplash.com/photo-1534430480872-3498386e7856?w=1200'; // ✏️ After image URL
+  const ASPECT       = '56.25%';  // ✏️ 56.25% = 16:9 | 75% = 4:3 | 100% = square
+
+  const FONT         = 'Lato';    // ✏️ Google Font name (or blank for system font)
+  const LABEL_BEFORE = 'Before';  // ✏️ Left label text
+  const LABEL_AFTER  = 'After';   // ✏️ Right label text
+  const HINT         = '← drag to compare →'; // ✏️ Hint text below slider
+  const LABEL_SIZE   = '12px';    // ✏️ Label font size
+  const HINT_SIZE    = '12px';    // ✏️ Hint font size
+
+  const ACCENT       = '#547792'; // ✏️ Handle & label color
+  const HINT_COLOR   = '#888888'; // ✏️ Hint text color
+
+  /* ============================================ */
+
+  if (FONT) {
+    const link = document.createElement('link');
+    link.rel  = 'stylesheet';
+    link.href = 'https://fonts.googleapis.com/css2?family=' + FONT.replace(/ /g, '+') + ':wght@400;700&display=swap';
+    document.head.appendChild(link);
+  }
+  const s = document.documentElement.style;
+  s.setProperty('--font',        FONT ? "'" + FONT + "', sans-serif" : 'system-ui, sans-serif');
+  s.setProperty('--before-img',  'url("' + BEFORE_IMG + '")');
+  s.setProperty('--after-img',   'url("' + AFTER_IMG + '")');
+  s.setProperty('--aspect',      ASPECT);
+  s.setProperty('--accent',      ACCENT);
+  s.setProperty('--label-size',  LABEL_SIZE);
+  s.setProperty('--hint-color',  HINT_COLOR);
+  s.setProperty('--hint-size',   HINT_SIZE);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('lbl-before').textContent = LABEL_BEFORE;
+    document.getElementById('lbl-after').textContent  = LABEL_AFTER;
+    document.getElementById('hint').textContent        = HINT;
+
+    const compare = document.getElementById('compare');
+    const after   = document.getElementById('after');
+    const divider = document.getElementById('divider');
+    const handle  = document.getElementById('handle');
+    let dragging  = false;
+
+    function setPosition(x) {
+      const rect = compare.getBoundingClientRect();
+      let pct = (x - rect.left) / rect.width;
+      pct = Math.max(0.02, Math.min(0.98, pct));
+      const p = (pct * 100).toFixed(2) + '%';
+      after.style.clipPath = \`inset(0 0 0 \${p})\`;
+      divider.style.left   = p;
+      handle.style.left    = p;
+    }
+
+    compare.addEventListener('mousedown', e => { dragging = true; setPosition(e.clientX); });
+    window.addEventListener('mousemove',  e => { if (dragging) setPosition(e.clientX); });
+    window.addEventListener('mouseup',    () => dragging = false);
+    compare.addEventListener('touchstart', e => { dragging = true; setPosition(e.touches[0].clientX); }, { passive: true });
+    window.addEventListener('touchmove',   e => { if (dragging) setPosition(e.touches[0].clientX); },   { passive: true });
+    window.addEventListener('touchend',    () => dragging = false);
+  });
+
+<\/script>
+<style>
+
+  /* ============================================
+     DO NOT EDIT BELOW THIS LINE
+     ============================================ */
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: transparent; font-family: var(--font);
+    display: flex; align-items: center; justify-content: center; min-height: 100vh;
+  }
+  .wrapper { width: 100%; max-width: 900px; padding: 0 24px; }
+  .compare {
+    position: relative; width: 100%; padding-top: var(--aspect);
+    overflow: hidden; border-radius: 12px; cursor: ew-resize;
+    user-select: none; -webkit-user-select: none;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+  }
+  .img-before, .img-after {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center; background-repeat: no-repeat;
+  }
+  .img-before { background-image: var(--before-img); }
+  .img-after  { background-image: var(--after-img); clip-path: inset(0 0 0 50%); }
+  .divider {
+    position: absolute; top: 0; bottom: 0; left: 50%;
+    width: 2px; background: #fff; transform: translateX(-50%);
+    pointer-events: none; box-shadow: 0 0 6px rgba(0,0,0,0.3);
+  }
+  .handle {
+    position: absolute; top: 50%; left: 50%;
+    width: 44px; height: 44px; background: #fff; border-radius: 50%;
+    transform: translate(-50%, -50%);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.25); pointer-events: none;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+  }
+  .handle svg { width: 20px; height: 20px; fill: var(--accent); flex-shrink: 0; }
+  .compare:active .handle { transform: translate(-50%, -50%) scale(1.12); box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+  .label-row { display: flex; justify-content: space-between; margin-bottom: 8px; }
+  .label { font-size: var(--label-size); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+  .hint { text-align: center; margin-top: 12px; font-size: var(--hint-size); color: var(--hint-color); letter-spacing: 0.04em; }
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="label-row">
+    <span class="label" id="lbl-before"></span>
+    <span class="label" id="lbl-after"></span>
+  </div>
+  <div class="compare" id="compare">
+    <div class="img-before"></div>
+    <div class="img-after" id="after"></div>
+    <div class="divider"   id="divider"></div>
+    <div class="handle"    id="handle">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 5l-6 7 6 7V13h8v4l6-7-6-7v4H8V5z"/>
+      </svg>
+    </div>
+  </div>
+  <p class="hint" id="hint"></p>
+</div>
+</body>
+</html>`,
+      },
+      {
+        id: 'seed-4',
+        title: 'Progress Reveal',
+        category: 'animation',
+        description: 'Animated progress bars that fill on load. Useful for showing stats or skill levels.',
+        code: `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script>
+
+  /* ============================================
+     CUSTOMIZE HERE
+     ============================================ */
+
+  const FONT        = 'Lato';    // ✏️ Google Font name (or blank for system font)
+  const TITLE_SIZE  = '18px';    // ✏️ Section title font size
+  const SKILL_SIZE  = '14px';    // ✏️ Skill label font size
+  const PCT_SIZE    = '13px';    // ✏️ Percentage label font size
+
+  const PAGE_BG     = '#ffffff'; // ✏️ Page background color
+  const TITLE_COLOR = '#1a1a2e'; // ✏️ Title text color
+  const SKILL_COLOR = '#333333'; // ✏️ Skill label color
+  const PCT_COLOR   = '#888888'; // ✏️ Percentage text color
+  const TRACK_BG    = '#f0f0f0'; // ✏️ Bar track color
+
+  const TITLE = 'Skills Overview'; // ✏️ Section heading
+
+  const BARS = [                   // ✏️ Add, remove, or edit bars below
+    { label: 'Instructional Design',  pct: 90, color: 'linear-gradient(90deg, #547792, #A08582)' },
+    { label: 'eLearning Development', pct: 80, color: 'linear-gradient(90deg, #2196F3, #21CBF3)' },
+    { label: 'Visual Design',         pct: 75, color: 'linear-gradient(90deg, #4CAF50, #8BC34A)' },
+    { label: 'RISE / Articulate',     pct: 85, color: 'linear-gradient(90deg, #FF9800, #FFB74D)' },
+  ];
+
+  /* ============================================ */
+
+  if (FONT) {
+    const link = document.createElement('link');
+    link.rel  = 'stylesheet';
+    link.href = 'https://fonts.googleapis.com/css2?family=' + FONT.replace(/ /g, '+') + ':wght@400;700&display=swap';
+    document.head.appendChild(link);
+  }
+  const s = document.documentElement.style;
+  s.setProperty('--font',        FONT ? "'" + FONT + "', sans-serif" : 'system-ui, sans-serif');
+  s.setProperty('--title-size',  TITLE_SIZE);
+  s.setProperty('--skill-size',  SKILL_SIZE);
+  s.setProperty('--pct-size',    PCT_SIZE);
+  s.setProperty('--page-bg',     PAGE_BG);
+  s.setProperty('--title-color', TITLE_COLOR);
+  s.setProperty('--skill-color', SKILL_COLOR);
+  s.setProperty('--pct-color',   PCT_COLOR);
+  s.setProperty('--track-bg',    TRACK_BG);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('section-title').textContent = TITLE;
+    const container = document.getElementById('bars');
+    BARS.forEach(b => {
+      container.insertAdjacentHTML('beforeend', \`
+        <div class="item">
+          <div class="row">
+            <span class="skill">\${b.label}</span>
+            <span class="pct">\${b.pct}%</span>
+          </div>
+          <div class="track">
+            <div class="bar" style="background:\${b.color}" data-width="\${b.pct}"></div>
+          </div>
+        </div>\`);
+    });
+    setTimeout(() => {
+      document.querySelectorAll('.bar').forEach(b => { b.style.width = b.dataset.width + '%'; });
+    }, 200);
+  });
+
+<\/script>
+<style>
+
+  /* ============================================
+     DO NOT EDIT BELOW THIS LINE
+     ============================================ */
+
+  body { margin: 0; font-family: var(--font); background: var(--page-bg); display: flex; align-items: center; justify-content: center; padding: 32px; box-sizing: border-box; }
+  .container { width: 100%; max-width: 380px; }
+  h3 { margin: 0 0 24px; color: var(--title-color); font-size: var(--title-size); }
+  .item { margin-bottom: 20px; }
+  .row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .skill { font-size: var(--skill-size); color: var(--skill-color); font-weight: 700; }
+  .pct   { font-size: var(--pct-size); color: var(--pct-color); }
+  .track { height: 8px; background: var(--track-bg); border-radius: 99px; overflow: hidden; }
+  .bar   { height: 100%; border-radius: 99px; width: 0; transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1); }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h3 id="section-title"></h3>
+    <div id="bars"></div>
+  </div>
+</body>
+</html>`
+      },
+      {
+        id: 'seed-16',
+        title: 'Knowledge Check',
+        category: 'interaction',
+        description: 'Multiple-choice question with instant correct/incorrect feedback and a retry option. Fully customizable question, options, and messaging.',
+        code: `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script>
+
+  /* ============================================
+     CUSTOMIZE HERE
+     ============================================ */
+
+  const FONT    = 'Lato';    // ✏️ Google Font name (or blank for system font)
+  const PAGE_BG = '#ffffff'; // ✏️ Page background
+  const ACCENT  = '#547792'; // ✏️ Accent color
+
+  const QUESTION = 'Which model is most commonly used in instructional design?';
+
+  const OPTIONS = [           // ✏️ Answer choices (2–5 options)
+    'ADDIE',
+    'Agile',
+    'Waterfall',
+    "Bloom's Taxonomy",
+  ];
+
+  const CORRECT = 0;          // ✏️ Index of the correct answer (0 = first option)
+
+  const FEEDBACK_CORRECT   = '✓ Correct! ADDIE (Analyze, Design, Develop, Implement, Evaluate) is the foundational instructional design model.';
+  const FEEDBACK_INCORRECT = '✗ Not quite. ADDIE is the most commonly used model in instructional design. Try again!';
+
+  /* ============================================ */
+
+  if (FONT) {
+    var lnk = document.createElement('link');
+    lnk.rel  = 'stylesheet';
+    lnk.href = 'https://fonts.googleapis.com/css2?family=' + FONT.replace(/ /g, '+') + ':wght@400;700&display=swap';
+    document.head.appendChild(lnk);
+  }
+  var _s = document.documentElement.style;
+  _s.setProperty('--font',    FONT ? "'" + FONT + "', sans-serif" : 'system-ui, sans-serif');
+  _s.setProperty('--accent',  ACCENT);
+  _s.setProperty('--page-bg', PAGE_BG);
+
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('q-text').textContent = QUESTION;
+    var list     = document.getElementById('options');
+    var selected = null;
+
+    OPTIONS.forEach(function(opt, i) {
+      var btn = document.createElement('button');
+      btn.className   = 'option';
+      btn.textContent = opt;
+      btn.addEventListener('click', function() {
+        if (document.getElementById('feedback').style.display !== 'none') return;
+        list.querySelectorAll('.option').forEach(function(b) { b.classList.remove('selected'); });
+        btn.classList.add('selected');
+        selected = i;
+      });
+      list.appendChild(btn);
+    });
+
+    document.getElementById('submit-btn').addEventListener('click', function() {
+      if (selected === null) return;
+      var isCorrect = (selected === CORRECT);
+      var fb = document.getElementById('feedback');
+      fb.textContent   = isCorrect ? FEEDBACK_CORRECT : FEEDBACK_INCORRECT;
+      fb.className     = 'feedback ' + (isCorrect ? 'correct' : 'incorrect');
+      fb.style.display = 'block';
+      list.querySelectorAll('.option').forEach(function(b, i) {
+        b.disabled = true;
+        if (i === CORRECT)               b.classList.add('is-correct');
+        else if (i === selected && !isCorrect) b.classList.add('is-wrong');
+      });
+      document.getElementById('submit-btn').style.display = 'none';
+      document.getElementById('retry-btn').style.display  = 'inline-block';
+    });
+
+    document.getElementById('retry-btn').addEventListener('click', function() {
+      selected = null;
+      list.querySelectorAll('.option').forEach(function(b) { b.disabled = false; b.className = 'option'; });
+      document.getElementById('feedback').style.display   = 'none';
+      document.getElementById('submit-btn').style.display = 'inline-block';
+      document.getElementById('retry-btn').style.display  = 'none';
+    });
+  });
+
+<\/script>
+<style>
+
+  /* ============================================
+     DO NOT EDIT BELOW THIS LINE
+     ============================================ */
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--font); background: var(--page-bg);
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh; padding: 32px 24px;
+  }
+  .card {
+    width: 100%; max-width: 560px; background: #fff;
+    border-radius: 16px; padding: 32px;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+  }
+  .kc-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
+  }
+  .question {
+    font-size: 17px; font-weight: 700; line-height: 1.45;
+    color: #1a1a1a; margin-bottom: 24px;
+  }
+  .options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+  .option {
+    text-align: left; padding: 13px 18px; border-radius: 10px;
+    border: 2px solid #e5e7eb; background: #f9fafb;
+    font-family: var(--font); font-size: 14px; font-weight: 500;
+    color: #333; cursor: pointer; transition: all 0.18s;
+  }
+  .option:hover:not(:disabled)  { border-color: var(--accent); background: #fff; }
+  .option.selected   { border-color: var(--accent); background: #fff8f7; color: var(--accent); font-weight: 700; }
+  .option.is-correct { border-color: #16a34a; background: #f0fdf4; color: #15803d; font-weight: 700; }
+  .option.is-wrong   { border-color: #dc2626; background: #fef2f2; color: #dc2626; font-weight: 700; }
+  .option:disabled { cursor: default; }
+  .actions { display: flex; gap: 10px; }
+  #submit-btn, #retry-btn {
+    padding: 11px 28px; border-radius: 9999px;
+    font-family: var(--font); font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.15s;
+  }
+  #submit-btn { border: none; background: var(--accent); color: #fff; }
+  #submit-btn:hover { opacity: 0.88; }
+  #retry-btn  { border: 2px solid var(--accent); background: transparent; color: var(--accent); }
+  #retry-btn:hover { background: var(--accent); color: #fff; }
+  .feedback {
+    display: none; margin-top: 18px; padding: 13px 18px;
+    border-radius: 10px; font-size: 14px; font-weight: 500; line-height: 1.5;
+  }
+  .feedback.correct   { background: #f0fdf4; color: #15803d; border: 1.5px solid #bbf7d0; }
+  .feedback.incorrect { background: #fef2f2; color: #dc2626; border: 1.5px solid #fecaca; }
+
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="kc-label">Knowledge Check</div>
+    <div class="question" id="q-text"></div>
+    <div class="options" id="options"></div>
+    <div class="actions">
+      <button id="submit-btn">Submit</button>
+      <button id="retry-btn" style="display:none">Try Again</button>
+    </div>
+    <div class="feedback" id="feedback"></div>
+  </div>
+</body>
+</html>`
+      },
+      {
+        id: 'seed-17',
+        title: 'Floating Particles',
+        category: 'animation',
+        description: 'Gently drifting particles on a transparent background. Great for hero sections or decorative backgrounds.',
+        code: `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script>
+
+  /* ============================================
+     CUSTOMIZE HERE
+     ============================================ */
+
+  const COLOR     = '#547792'; // ✏️ Particle color
+  const COUNT     = 55;        // ✏️ Number of particles
+  const MIN_R     = 2;         // ✏️ Min particle radius (px)
+  const MAX_R     = 6;         // ✏️ Max particle radius (px)
+  const MIN_SPEED = 0.15;      // ✏️ Min drift speed
+  const MAX_SPEED = 0.55;      // ✏️ Max drift speed
+  const OPACITY   = 0.45;      // ✏️ Max particle opacity (0–1)
+  const HEIGHT    = '300px';   // ✏️ Block height
+
+  /* ============================================ */
+
+  document.documentElement.style.setProperty('--height', HEIGHT);
+
+<\/script>
+<style>
+
+  /* ============================================
+     DO NOT EDIT BELOW THIS LINE
+     ============================================ */
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: transparent; overflow: hidden; }
+  canvas { display: block; width: 100%; height: var(--height); }
+
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+  var canvas = document.getElementById('c');
+  var ctx    = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width  = canvas.offsetWidth  || window.innerWidth;
+    canvas.height = canvas.offsetHeight || parseInt(HEIGHT);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function rand(a, b) { return a + Math.random() * (b - a); }
+
+  var hex = COLOR.replace('#', '');
+  var cr  = parseInt(hex.slice(0, 2), 16);
+  var cg  = parseInt(hex.slice(2, 4), 16);
+  var cb  = parseInt(hex.slice(4, 6), 16);
+
+  var particles = [];
+  for (var i = 0; i < COUNT; i++) {
+    particles.push({
+      x:  rand(0, canvas.width),
+      y:  rand(0, canvas.height),
+      r:  rand(MIN_R, MAX_R),
+      vx: rand(-MAX_SPEED, MAX_SPEED) * 0.4,
+      vy: -rand(MIN_SPEED, MAX_SPEED),
+      a:  rand(0.05, OPACITY),
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (var i = 0; i < particles.length; i++) {
+      var p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.y + p.r < 0)            p.y = canvas.height + p.r;
+      if (p.x + p.r < 0)            p.x = canvas.width  + p.r;
+      if (p.x - p.r > canvas.width) p.x = -p.r;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(' + cr + ',' + cg + ',' + cb + ',' + p.a + ')';
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+<\/script>
+</body>
+</html>`
+      },
+      {
+        id: 'seed-19',
+        title: 'Chevron Edge',
+        category: 'transition',
+        description: 'A bold downward-pointing chevron arrow — draws the eye toward the next section.',
+        code: `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+
+  /* ============================================
+     CUSTOMIZE HERE
+     ============================================ */
+
+  :root {
+    --color:  #547792; /* ✏️ Color */
+    --height: 80px;    /* ✏️ Block height */
+    /* 💡 The transparent area below will automatically show
+          your RISE block background color */
+  }
+
+  /* ============================================
+     DO NOT EDIT BELOW THIS LINE
+     ============================================ */
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: transparent; }
+  .container { width: 100%; height: var(--height); overflow: hidden; }
+  svg { width: 100%; height: 100%; display: block; }
+
+</style>
+</head>
+<body>
+<div class="container">
+  <svg viewBox="0 0 1200 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="0,0 1200,0 1200,52 600,80 0,52" fill="var(--color)"/>
+  </svg>
+</div>
+</body>
+</html>`
+      },
+      {
+        id: 'seed-20',
+        title: 'Curved Arch',
+        category: 'transition',
+        description: 'A smooth concave arch at the bottom — elegant and modern transition between sections.',
+        code: `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+
+  /* ============================================
+     CUSTOMIZE HERE
+     ============================================ */
+
+  :root {
+    --color:  #547792; /* ✏️ Color */
+    --height: 100px;   /* ✏️ Block height */
+    /* 💡 The transparent area below will automatically show
+          your RISE block background color */
+  }
+
+  /* ============================================
+     DO NOT EDIT BELOW THIS LINE
+     ============================================ */
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: transparent; }
+  .container { width: 100%; height: var(--height); overflow: hidden; }
+  svg { width: 100%; height: 100%; display: block; }
+
+</style>
+</head>
+<body>
+<div class="container">
+  <svg viewBox="0 0 1200 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,0 L1200,0 L1200,40 Q600,110 0,40 Z" fill="var(--color)"/>
+  </svg>
+</div>
+</body>
+</html>`
+      },
+      {
+        id: 'seed-20b',
+        title: 'Curved Arch — Inverted',
+        category: 'transition',
+        description: 'The flipped version of Curved Arch — solid color rises from the bottom with a smooth convex arch at the top. Paste at the start of a content block.',
+        code: `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+
+  /* ============================================
+     CUSTOMIZE HERE
+     ============================================ */
+
+  :root {
+    --color:  #547792; /* ✏️ Color */
+    --height: 100px;   /* ✏️ Block height */
+    /* 💡 The transparent area above will automatically show
+          your RISE block background color */
+  }
+
+  /* ============================================
+     DO NOT EDIT BELOW THIS LINE
+     ============================================ */
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: transparent; }
+  .container { width: 100%; height: var(--height); overflow: hidden; }
+  svg { width: 100%; height: 100%; display: block; }
+
+</style>
+</head>
+<body>
+<div class="container">
+  <svg viewBox="0 0 1200 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,100 L1200,100 L1200,60 Q600,-10 0,60 Z" fill="var(--color)"/>
+  </svg>
+</div>
+</body>
+</html>`
+      },
+      {
+        id: 'seed-21',
+        title: 'Sticker Board',
+        category: 'interaction',
+        description: 'An open canvas where you can add colourful sticky notes, drag them around, and type freely inside each one.',
+        code: `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script>
+
+  /* ============================================
+     CUSTOMIZE HERE
+     ============================================ */
+
+  const FONT         = 'Lato';    // Google Font name (or blank for system font)
+  const WORKSPACE_BG = '#F2ECE8'; // Canvas background
+  const ACCENT       = '#547792'; // Button color
+  const HEIGHT       = '440px';   // Block height
+  const PLACEHOLDER  = 'Type here\u2026'; // Placeholder text
+
+  const COLORS = [                // Sticker color palette
+    '#FEF08A', // yellow
+    '#BBF7D0', // green
+    '#BAE6FD', // blue
+    '#FBCFE8', // pink
+    '#DDD6FE', // purple
+    '#FED7AA', // orange
+  ];
+
+  /* ============================================ */
+
+  if (FONT) {
+    var _lnk = document.createElement('link');
+    _lnk.rel  = 'stylesheet';
+    _lnk.href = 'https://fonts.googleapis.com/css2?family=' + FONT.replace(/ /g, '+') + ':wght@400;600&display=swap';
+    document.head.appendChild(_lnk);
+  }
+  var _s = document.documentElement.style;
+  _s.setProperty('--font',         FONT ? "'" + FONT + "', sans-serif" : 'system-ui, sans-serif');
+  _s.setProperty('--workspace-bg', WORKSPACE_BG);
+  _s.setProperty('--accent',       ACCENT);
+  _s.setProperty('--height',       HEIGHT);
+
+<\/script>
+<style>
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font); background: transparent; overflow: hidden; }
+
+  .board { width: 100%; height: var(--height); display: flex; flex-direction: column; }
+
+  .toolbar {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 16px; flex-shrink: 0;
+    background: var(--workspace-bg);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+  .add-btn {
+    display: flex; align-items: center; gap: 6px;
+    padding: 7px 16px; border-radius: 9999px; border: none;
+    background: var(--accent); color: #fff;
+    font-family: var(--font); font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: opacity 0.15s; flex-shrink: 0;
+  }
+  .add-btn:hover { opacity: 0.88; }
+  .swatches { display: flex; gap: 7px; align-items: center; }
+  .swatch {
+    width: 20px; height: 20px; border-radius: 50%;
+    border: 2.5px solid transparent; cursor: pointer;
+    transition: transform 0.12s, border-color 0.12s; flex-shrink: 0;
+  }
+  .swatch:hover  { transform: scale(1.2); }
+  .swatch.active { border-color: rgba(0,0,0,0.45); transform: scale(1.15); }
+  .dl-btn {
+    display: flex; align-items: center; gap: 5px;
+    padding: 7px 14px; border-radius: 9999px;
+    border: 1.5px solid rgba(0,0,0,0.18); background: transparent;
+    font-family: var(--font); font-size: 13px; font-weight: 600;
+    color: rgba(0,0,0,0.5); cursor: pointer; transition: all 0.15s;
+    margin-left: auto; flex-shrink: 0;
+  }
+  .dl-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  .workspace {
+    flex: 1; position: relative;
+    background: var(--workspace-bg); overflow: hidden;
+  }
+  .hint {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    pointer-events: none; color: rgba(0,0,0,0.22);
+    font-size: 13px; font-weight: 500; letter-spacing: 0.02em;
+  }
+
+  .sticker {
+    position: absolute; width: 162px;
+    border-radius: 3px;
+    box-shadow: 3px 5px 16px rgba(0,0,0,0.15), 0 1px 3px rgba(0,0,0,0.08);
+    display: flex; flex-direction: column;
+    cursor: grab;
+  }
+  .sticker:active { cursor: grabbing; }
+
+  .sticker-bar {
+    display: flex; align-items: center; justify-content: flex-end;
+    padding: 5px 6px 0; cursor: grab;
+  }
+  .sticker-bar:active { cursor: grabbing; }
+
+  .sticker-close {
+    background: none; border: none; line-height: 1;
+    font-size: 16px; color: rgba(0,0,0,0.3);
+    cursor: pointer; padding: 0 1px; border-radius: 3px;
+    font-family: var(--font); transition: color 0.12s;
+  }
+  .sticker-close:hover { color: rgba(0,0,0,0.65); }
+
+  .sticker-text {
+    width: 100%; min-height: 90px;
+    background: transparent; border: none; outline: none;
+    resize: none; overflow: hidden;
+    font-family: var(--font); font-size: 13px; line-height: 1.65;
+    color: rgba(0,0,0,0.72); padding: 2px 10px 12px;
+    cursor: text;
+  }
+  .sticker-text::placeholder { color: rgba(0,0,0,0.28); }
+
+</style>
+</head>
+<body>
+
+<div class="board">
+  <div class="toolbar">
+    <button class="add-btn" id="add-btn">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      Add Sticker
+    </button>
+    <div class="swatches" id="swatches"></div>
+    <button class="dl-btn" id="dl-btn">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6.5 1v7.5M3.5 6l3 3 3-3M1 10.5v1a.5.5 0 00.5.5h11a.5.5 0 00.5-.5v-1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Save as PNG
+    </button>
+  </div>
+  <div class="workspace" id="workspace">
+    <div class="hint" id="hint">Click \u201cAdd Sticker\u201d to get started \u2736</div>
+  </div>
+</div>
+
+<script>
+  var workspace   = document.getElementById('workspace');
+  var hint        = document.getElementById('hint');
+  var swatchWrap  = document.getElementById('swatches');
+  var activeColor = COLORS[0];
+  var zTop        = 10;
+  var dragging    = null;
+
+  document.addEventListener('mousemove', function(e) {
+    if (!dragging) return;
+    var r = workspace.getBoundingClientRect();
+    dragging.el.style.left = Math.max(0, Math.min(r.width  - dragging.el.offsetWidth,  e.clientX - r.left - dragging.ox)) + 'px';
+    dragging.el.style.top  = Math.max(0, Math.min(r.height - dragging.el.offsetHeight, e.clientY - r.top  - dragging.oy)) + 'px';
+  });
+  document.addEventListener('mouseup',  function() { dragging = null; });
+  document.addEventListener('touchmove', function(e) {
+    if (!dragging) return;
+    var r = workspace.getBoundingClientRect();
+    dragging.el.style.left = Math.max(0, Math.min(r.width  - dragging.el.offsetWidth,  e.touches[0].clientX - r.left - dragging.ox)) + 'px';
+    dragging.el.style.top  = Math.max(0, Math.min(r.height - dragging.el.offsetHeight, e.touches[0].clientY - r.top  - dragging.oy)) + 'px';
+  }, { passive: true });
+  document.addEventListener('touchend', function() { dragging = null; });
+
+  COLORS.forEach(function(c, i) {
+    var sw = document.createElement('div');
+    sw.className = 'swatch' + (i === 0 ? ' active' : '');
+    sw.style.background = c;
+    sw.title = 'Select color';
+    sw.addEventListener('click', function() {
+      document.querySelectorAll('.swatch').forEach(function(s) { s.classList.remove('active'); });
+      sw.classList.add('active');
+      activeColor = c;
+    });
+    swatchWrap.appendChild(sw);
+  });
+
+  function addSticker() {
+    hint.style.display = 'none';
+    var r   = workspace.getBoundingClientRect();
+    var x   = Math.random() * Math.max(20, r.width  - 180) + 10;
+    var y   = Math.random() * Math.max(20, r.height - 150) + 10;
+    var rot = (Math.random() * 7 - 3.5).toFixed(1);
+
+    var el = document.createElement('div');
+    el.className = 'sticker';
+    el.style.cssText = 'background:' + activeColor + ';left:' + x + 'px;top:' + y + 'px;transform:rotate(' + rot + 'deg);z-index:' + (++zTop);
+
+    var bar = document.createElement('div');
+    bar.className = 'sticker-bar';
+
+    var closeBtn = document.createElement('button');
+    closeBtn.className = 'sticker-close';
+    closeBtn.textContent = '\u00d7';
+    closeBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      workspace.removeChild(el);
+      if (!workspace.querySelector('.sticker')) hint.style.display = '';
+    });
+
+    var ta = document.createElement('textarea');
+    ta.className = 'sticker-text';
+    ta.placeholder = PLACEHOLDER;
+    ta.addEventListener('input', function() {
+      ta.style.height = 'auto';
+      ta.style.height = ta.scrollHeight + 'px';
+    });
+    ta.addEventListener('mousedown', function(e) { e.stopPropagation(); });
+
+    bar.appendChild(closeBtn);
+    el.appendChild(bar);
+    el.appendChild(ta);
+    workspace.appendChild(el);
+    setTimeout(function() { ta.focus(); }, 30);
+
+    function startDrag(cx, cy) {
+      var r = workspace.getBoundingClientRect();
+      dragging = { el: el, ox: cx - r.left - el.offsetLeft, oy: cy - r.top - el.offsetTop };
+      el.style.zIndex = ++zTop;
+    }
+    el.addEventListener('mousedown', function(e) {
+      if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'BUTTON') return;
+      startDrag(e.clientX, e.clientY);
+      e.preventDefault();
+    });
+    el.addEventListener('touchstart', function(e) {
+      if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'BUTTON') return;
+      startDrag(e.touches[0].clientX, e.touches[0].clientY);
+    }, { passive: true });
+  }
+
+  document.getElementById('add-btn').addEventListener('click', addSticker);
+
+  function wrapText(ctx, text, maxWidth) {
+    var result = [];
+    text.split('\\n').forEach(function(para) {
+      if (!para) { result.push(''); return; }
+      var words = para.split(' '), line = '';
+      words.forEach(function(w) {
+        var test = line ? line + ' ' + w : w;
+        if (ctx.measureText(test).width > maxWidth && line) { result.push(line); line = w; }
+        else line = test;
+      });
+      if (line) result.push(line);
+    });
+    return result;
+  }
+
+  function roundRect(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y); ctx.lineTo(x + w - r, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    ctx.lineTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.closePath();
+  }
+
+  function downloadBoard() {
+    var stickers = workspace.querySelectorAll('.sticker');
+    if (!stickers.length) { alert('Add some stickers first!'); return; }
+
+    var dpi    = 2;
+    var wsRect = workspace.getBoundingClientRect();
+    var canvas = document.createElement('canvas');
+    canvas.width  = wsRect.width  * dpi;
+    canvas.height = wsRect.height * dpi;
+    var ctx = canvas.getContext('2d');
+    ctx.scale(dpi, dpi);
+
+    ctx.fillStyle = WORKSPACE_BG;
+    ctx.fillRect(0, 0, wsRect.width, wsRect.height);
+
+    var sorted = Array.prototype.slice.call(stickers).sort(function(a, b) {
+      return (parseInt(a.style.zIndex) || 0) - (parseInt(b.style.zIndex) || 0);
+    });
+
+    sorted.forEach(function(el) {
+      var x   = el.offsetLeft;
+      var y   = el.offsetTop;
+      var w   = el.offsetWidth;
+      var h   = el.offsetHeight;
+      var rot = parseFloat((el.style.transform.match(/rotate\\(([^d]+)deg\\)/) || [0, 0])[1]);
+      var bg  = el.style.background;
+      var ta  = el.querySelector('textarea');
+      var txt = ta ? ta.value : '';
+
+      ctx.save();
+      ctx.translate(x + w / 2, y + h / 2);
+      ctx.rotate(rot * Math.PI / 180);
+      ctx.shadowColor   = 'rgba(0,0,0,0.13)';
+      ctx.shadowBlur    = 10;
+      ctx.shadowOffsetX = 3;
+      ctx.shadowOffsetY = 5;
+      ctx.fillStyle = bg;
+      roundRect(ctx, -w / 2, -h / 2, w, h, 3);
+      ctx.fill();
+      ctx.shadowColor = 'transparent';
+
+      if (txt) {
+        var fs = 13, lh = fs * 1.65;
+        ctx.font         = fs + 'px ' + (FONT || 'system-ui, sans-serif');
+        ctx.fillStyle    = 'rgba(0,0,0,0.72)';
+        ctx.textBaseline = 'top';
+        wrapText(ctx, txt, w - 20).forEach(function(line, i) {
+          ctx.fillText(line, -w / 2 + 10, -h / 2 + 22 + i * lh);
+        });
+      }
+
+      ctx.restore();
+    });
+
+    var dataUrl = canvas.toDataURL('image/png');
+
+    var overlay = document.createElement('div');
+    overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.7);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;z-index:9999;padding:24px;box-sizing:border-box;';
+
+    var hint = document.createElement('p');
+    hint.textContent = 'Right-click the image → Save image as…';
+    hint.style.cssText = 'color:#fff;font-size:13px;margin:0;opacity:0.85;';
+
+    var img = document.createElement('img');
+    img.src = dataUrl;
+    img.style.cssText = 'max-width:100%;max-height:75vh;border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,0.5);';
+
+    var closeBtn = document.createElement('button');
+    closeBtn.textContent = '✕ Close';
+    closeBtn.style.cssText = 'margin-top:4px;padding:8px 20px;border:none;border-radius:99px;background:#fff;color:#333;font-size:13px;font-weight:600;cursor:pointer;';
+    closeBtn.addEventListener('click', function() { document.body.removeChild(overlay); });
+
+    overlay.appendChild(hint);
+    overlay.appendChild(img);
+    overlay.appendChild(closeBtn);
+    document.body.appendChild(overlay);
+  }
+
+  document.getElementById('dl-btn').addEventListener('click', downloadBoard);
+<\/script>
+
+</body>
+</html>`
+      },
+      {
+        id: 'seed-22',
+        title: 'Journal Entry',
+        category: 'interaction',
+        description: 'A clean journal-style writing space. Learners type their thoughts and copy the entry to paste into any doc.',
+        instructions: [
+          {
+            title: 'Change the prompt or placeholder',
+            desc: 'Edit the <code>PLACEHOLDER</code> variable to set the hint text shown before the user starts writing.',
+          },
+          {
+            title: 'Copy Entry',
+            desc: 'Click "Copy Entry" to open a panel showing your text. Hit "Copy All" then paste into Word, Google Docs, or Notion.',
+          },
+          {
+            title: 'Change colours & font',
+            desc: 'Edit <code>PAGE_BG</code>, <code>PAPER_BG</code>, <code>ACCENT</code>, and <code>TEXT_COLOR</code> at the top of the script.',
+          },
+        ],
+        code: `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script>
+
+  /* ============================================
+     CUSTOMIZE HERE
+     ============================================ */
+
+  const FONT        = 'Lato';      // ✏️ Google Font name (or blank for system font)
+  const PAGE_BG     = 'transparent'; // ✏️ Background behind the journal
+  const PAPER_BG    = '#FFFFFF';   // ✏️ Journal card color
+  const ACCENT       = '#547792';   // ✏️ Primary color (icon, button, focus line)
+  const ICON_BG      = '#FFDAD5';   // ✏️ Icon background color
+  const TEXT_COLOR   = '#1C1514';   // ✏️ Writing text color
+  const META_COLOR   = '#547792';   // ✏️ Label, date & word-count color
+  const FONT_SIZE    = '15px';      // ✏️ Writing area font size
+  const LINE_HEIGHT  = '1.8';       // ✏️ Writing area line height
+  const HEIGHT       = '500px';     // ✏️ Block height
+  const PLACEHOLDER  = 'Start writing\u2026'; // ✏️ Placeholder text
+
+  /* ============================================ */
+
+  if (FONT) {
+    var _lnk = document.createElement('link');
+    _lnk.rel  = 'stylesheet';
+    _lnk.href = 'https://fonts.googleapis.com/css2?family=' + FONT.replace(/ /g, '+') + ':ital,wght@0,400;0,500;0,600;1,400&display=swap';
+    document.head.appendChild(_lnk);
+  }
+
+<\/script>
+<style>
+
+  /* ============================================
+     DO NOT EDIT BELOW THIS LINE
+     ============================================ */
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--page-bg);
+    font-family: var(--font);
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh; padding: 32px 20px;
+  }
+
+  /* ── Card ── */
+  .journal-card {
+    background: var(--paper-bg);
+    border-radius: 28px;
+    box-shadow: 0px 1px 2px rgba(0,0,0,0.12), 0px 2px 6px 2px rgba(0,0,0,0.08);
+    width: 100%; max-width: 680px;
+    height: var(--height);
+    display: flex; flex-direction: column;
+    overflow: hidden;
+    transition: box-shadow 200ms cubic-bezier(0.2,0,0,1);
+  }
+
+  /* ── Header ── */
+  .journal-header {
+    display: flex; align-items: center; gap: 12px;
+    padding: 20px 28px 18px;
+    border-bottom: 1px solid var(--outline-variant);
+    flex-shrink: 0;
+  }
+  .journal-icon {
+    width: 38px; height: 38px; flex-shrink: 0;
+    background: var(--icon-bg);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .journal-icon svg { width: 18px; height: 18px; color: var(--accent-color); }
+  .journal-meta { flex: 1; min-width: 0; }
+  .journal-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.8px;
+    text-transform: uppercase; color: var(--meta-color);
+    margin-bottom: 2px;
+  }
+  .journal-date {
+    font-size: 13px; font-weight: 400;
+    color: var(--meta-color);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  /* ── Writing area ── */
+  .journal-body {
+    flex: 1; position: relative; overflow: hidden;
+  }
+  textarea {
+    width: 100%; height: 100%;
+    border: none; outline: none; resize: none;
+    font-family: var(--font); font-size: var(--font-size); line-height: var(--line-height);
+    color: var(--text-color);
+    background: transparent;
+    padding: 20px 28px;
+    border-left: 3px solid transparent;
+    transition: border-color 200ms cubic-bezier(0.2,0,0,1);
+  }
+  textarea:focus { border-left-color: var(--accent-color); }
+  textarea::placeholder { color: var(--placeholder-color); }
+
+  /* ── Footer ── */
+  .journal-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 28px 18px;
+    border-top: 1px solid var(--outline-variant);
+    flex-shrink: 0;
+  }
+  .word-count {
+    font-size: 12px; font-weight: 500;
+    color: var(--meta-color);
+    letter-spacing: 0.1px;
+  }
+
+  /* MD3 Filled button */
+  .save-btn {
+    background: var(--accent-color); color: #fff;
+    border: none; border-radius: 9999px;
+    padding: 10px 24px;
+    font-family: var(--font); font-size: 14px; font-weight: 500;
+    letter-spacing: 0.1px; cursor: pointer;
+    box-shadow: 0px 1px 2px rgba(0,0,0,0.2);
+    transition: box-shadow 200ms cubic-bezier(0.2,0,0,1),
+                background 200ms cubic-bezier(0.2,0,0,1);
+    position: relative; overflow: hidden;
+  }
+  .save-btn::after {
+    content: ''; position: absolute; inset: 0;
+    background: #fff; opacity: 0;
+    transition: opacity 200ms cubic-bezier(0.2,0,0,1);
+  }
+  .save-btn:hover { box-shadow: 0px 1px 2px rgba(0,0,0,0.3), 0px 2px 6px 2px rgba(0,0,0,0.15); }
+  .save-btn:hover::after { opacity: 0.08; }
+  .save-btn:active::after { opacity: 0.12; }
+
+</style>
+</head>
+<body>
+
+<div class="journal-card">
+  <div class="journal-header">
+    <div class="journal-icon">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="journal-meta">
+      <div class="journal-label">Journal Entry</div>
+      <div class="journal-date" id="date-el"></div>
+    </div>
+  </div>
+  <div class="journal-body">
+    <textarea id="entry" spellcheck="true"></textarea>
+  </div>
+  <div class="journal-footer">
+    <span class="word-count" id="word-count">0 words</span>
+    <button class="save-btn" id="save-btn">Copy Entry</button>
+  </div>
+</div>
+
+<script>
+
+  // Apply CSS variables
+  var r = document.documentElement.style;
+  r.setProperty('--font',             FONT ? "'" + FONT + "',sans-serif" : 'system-ui,sans-serif');
+  r.setProperty('--page-bg',          PAGE_BG);
+  r.setProperty('--paper-bg',         PAPER_BG);
+  r.setProperty('--accent-color',     ACCENT);
+  r.setProperty('--text-color',       TEXT_COLOR);
+  r.setProperty('--height',           HEIGHT);
+  r.setProperty('--icon-bg',          ICON_BG);
+  r.setProperty('--font-size',        FONT_SIZE);
+  r.setProperty('--line-height',      LINE_HEIGHT);
+  r.setProperty('--on-surface-variant','#534341');
+  r.setProperty('--meta-color',        META_COLOR);
+  r.setProperty('--outline-variant',  '#F0E4E1');
+  r.setProperty('--placeholder-color','rgba(28,21,20,0.32)');
+
+  // Date
+  var now = new Date();
+  var dateStr = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  document.getElementById('date-el').textContent = dateStr;
+
+  // Placeholder
+  document.getElementById('entry').placeholder = PLACEHOLDER;
+
+  // Live word count
+  var ta = document.getElementById('entry');
+  var wc = document.getElementById('word-count');
+  function updateCount() {
+    var words = ta.value.trim() === '' ? 0 : ta.value.trim().split(/\\s+/).length;
+    wc.textContent = words + (words === 1 ? ' word' : ' words');
+  }
+  ta.addEventListener('input', updateCount);
+
+  // Save as Doc overlay
+  document.getElementById('save-btn').addEventListener('click', function() {
+    var text = ta.value.trim();
+    if (!text) { alert('Write something first!'); return; }
+
+    var content = dateStr + '\\n\\n' + text;
+    var fontStack = FONT ? "'" + FONT + "',sans-serif" : 'system-ui,sans-serif';
+
+    // Scrim
+    var scrim = document.createElement('div');
+    scrim.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;z-index:9999;padding:24px;box-sizing:border-box;animation:fadeIn 200ms ease;';
+
+    // Modal card
+    var modal = document.createElement('div');
+    modal.style.cssText = 'background:#fff;border-radius:28px;width:100%;max-width:580px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0px 4px 8px 3px rgba(0,0,0,0.15),0px 1px 3px rgba(0,0,0,0.3);animation:slideUp 300ms cubic-bezier(0.34,1.56,0.64,1);';
+
+    // Modal header
+    var mHead = document.createElement('div');
+    mHead.style.cssText = 'padding:20px 24px 16px;border-bottom:1px solid #F0E4E1;';
+    var mTitle = document.createElement('p');
+    mTitle.textContent = 'Your entry is ready';
+    mTitle.style.cssText = 'font-family:' + fontStack + ';font-size:16px;font-weight:600;color:#1C1514;margin-bottom:4px;';
+    var mSub = document.createElement('p');
+    mSub.textContent = 'Copy and paste into Word, Google Docs, or Notion.';
+    mSub.style.cssText = 'font-family:' + fontStack + ';font-size:13px;color:#534341;line-height:1.5;';
+    mHead.appendChild(mTitle);
+    mHead.appendChild(mSub);
+
+    // Textarea
+    var preview = document.createElement('textarea');
+    preview.value = content;
+    preview.readOnly = true;
+    preview.style.cssText = 'width:100%;height:240px;border:none;outline:none;resize:none;padding:20px 24px;font-family:' + fontStack + ';font-size:14px;line-height:1.75;color:' + TEXT_COLOR + ';background:#FAF7F5;';
+
+    // Footer
+    var mFoot = document.createElement('div');
+    mFoot.style.cssText = 'display:flex;justify-content:flex-end;gap:8px;padding:14px 20px;border-top:1px solid #F0E4E1;';
+
+    var closeBtn = document.createElement('button');
+    closeBtn.textContent = 'Close';
+    closeBtn.style.cssText = 'font-family:' + fontStack + ';font-size:14px;font-weight:500;padding:10px 24px;border:1px solid #C4ADA9;border-radius:9999px;background:transparent;color:#534341;cursor:pointer;';
+    closeBtn.addEventListener('click', function() { document.body.removeChild(scrim); });
+
+    var copyBtn = document.createElement('button');
+    copyBtn.textContent = 'Copy All';
+    copyBtn.style.cssText = 'font-family:' + fontStack + ';font-size:14px;font-weight:500;padding:10px 24px;border:none;border-radius:9999px;background:' + ACCENT + ';color:#fff;cursor:pointer;box-shadow:0px 1px 2px rgba(0,0,0,0.2);';
+    copyBtn.addEventListener('click', function() {
+      preview.select();
+      navigator.clipboard.writeText(content).catch(function() { document.execCommand('copy'); });
+      copyBtn.textContent = '✓ Copied!';
+      setTimeout(function() { copyBtn.textContent = 'Copy All'; }, 2000);
+    });
+
+    var style = document.createElement('style');
+    style.textContent = '@keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes slideUp{from{transform:translateY(16px) scale(0.97);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}';
+    document.head.appendChild(style);
+
+    mFoot.appendChild(closeBtn);
+    mFoot.appendChild(copyBtn);
+    modal.appendChild(mHead);
+    modal.appendChild(preview);
+    modal.appendChild(mFoot);
+    scrim.appendChild(modal);
+    document.body.appendChild(scrim);
+
+    setTimeout(function() { preview.select(); }, 80);
+  });
+
+<\/script>
+</body>
+</html>`
+      },
+      {
+        id: 'seed-23',
+        title: 'Scratch Card',
+        category: 'interaction',
+        description: 'Drag to scratch away the surface and reveal a hidden message underneath. Auto-reveals once enough is scratched.',
+        code: `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script>
+
+  /* ============================================
+     CUSTOMIZE HERE
+     ============================================ */
+
+  const FONT          = 'Lato';       // ✏️ Google Font name (or blank for system font)
+  const HEIGHT        = '300px';      // ✏️ Block height
+
+  const SCRATCH_COLOR = '#8B6B65';    // ✏️ Scratch surface color
+  const HINT          = 'Scratch to reveal'; // ✏️ Hint text on the surface
+
+  const REVEAL_BG     = '#FFF8F7';    // ✏️ Revealed card background
+  const ACCENT        = '#547792';    // ✏️ Accent color
+  const ICON          = '🎉';        // ✏️ Emoji shown on reveal
+  const TITLE         = 'Well done!'; // ✏️ Reveal heading
+  const MESSAGE       = 'You unlocked this section. Keep it up!'; // ✏️ Reveal message
+
+  const BRUSH_SIZE    = 32;           // ✏️ Scratch brush radius (px) — bigger = easier
+  const THRESHOLD     = 50;           // ✏️ % scratched before auto-reveal (0–100)
+
+  /* ============================================ */
+
+  if (FONT) {
+    var _l = document.createElement('link');
+    _l.rel  = 'stylesheet';
+    _l.href = 'https://fonts.googleapis.com/css2?family=' + FONT.replace(/ /g, '+') + ':wght@400;600;700&display=swap';
+    document.head.appendChild(_l);
+  }
+  var _s = document.documentElement.style;
+  _s.setProperty('--font',   FONT ? "'" + FONT + "',sans-serif" : 'system-ui,sans-serif');
+  _s.setProperty('--h',      HEIGHT);
+  _s.setProperty('--accent', ACCENT);
+  _s.setProperty('--rev-bg', REVEAL_BG);
+
+<\/script>
+<style>
+
+  /* ============================================
+     DO NOT EDIT BELOW THIS LINE
+     ============================================ */
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: transparent; font-family: var(--font);
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh; padding: 32px 24px;
+  }
+
+  .wrap {
+    position: relative; width: 100%; max-width: 480px;
+    border-radius: 24px; overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+    user-select: none; -webkit-user-select: none;
+  }
+
+  /* ── Reveal layer (underneath) ── */
+  .reveal {
+    background: var(--rev-bg);
+    padding: 52px 32px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; gap: 12px; min-height: 240px;
+  }
+  .rev-icon  { font-size: 52px; line-height: 1; }
+  .rev-title { font-size: 22px; font-weight: 700; color: var(--accent); letter-spacing: -0.3px; }
+  .rev-msg   { font-size: 15px; line-height: 1.65; color: rgba(0,0,0,0.5); max-width: 320px; }
+
+  /* ── Canvas overlay ── */
+  canvas {
+    position: absolute; inset: 0;
+    cursor: crosshair;
+    transition: opacity 0.7s ease;
+  }
+  canvas.done { opacity: 0; pointer-events: none; }
+
+  /* ── Hint label ── */
+  .hint {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 10px;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .hint.hidden { opacity: 0; }
+  .hint-coin { font-size: 34px; animation: tilt 1.6s ease-in-out infinite; }
+  @keyframes tilt { 0%,100% { transform: rotate(-10deg); } 50% { transform: rotate(10deg); } }
+  .hint-text {
+    font-size: 14px; font-weight: 600; letter-spacing: 0.3px;
+    color: rgba(255,255,255,0.82);
+  }
+
+</style>
+</head>
+<body>
+
+<div class="wrap" id="wrap">
+  <div class="reveal">
+    <div class="rev-icon"  id="r-icon"></div>
+    <div class="rev-title" id="r-title"></div>
+    <div class="rev-msg"   id="r-msg"></div>
+  </div>
+  <canvas id="c"></canvas>
+  <div class="hint" id="hint">
+    <span class="hint-coin">🪙</span>
+    <span class="hint-text" id="hint-text"></span>
+  </div>
+</div>
+
+<script>
+  document.getElementById('r-icon').textContent    = ICON;
+  document.getElementById('r-title').textContent   = TITLE;
+  document.getElementById('r-msg').textContent     = MESSAGE;
+  document.getElementById('hint-text').textContent = HINT;
+
+  var wrap   = document.getElementById('wrap');
+  var canvas = document.getElementById('c');
+  var ctx    = canvas.getContext('2d');
+  var hint   = document.getElementById('hint');
+  var active = false, done = false;
+  var dpr    = window.devicePixelRatio || 1;
+
+  function init() {
+    var w = wrap.offsetWidth  || 480;
+    var h = wrap.offsetHeight || 300;
+    canvas.width  = w * dpr;
+    canvas.height = h * dpr;
+    canvas.style.width  = w + 'px';
+    canvas.style.height = h + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    // Base fill
+    ctx.fillStyle = SCRATCH_COLOR;
+    ctx.fillRect(0, 0, w, h);
+
+    // Subtle diagonal stripe texture
+    ctx.save();
+    ctx.strokeStyle = 'rgba(255,255,255,0.07)';
+    ctx.lineWidth = 14;
+    for (var x = -h; x < w + h; x += 30) {
+      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x + h, h); ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  function erase(x, y) {
+    if (done) return;
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.beginPath();
+    ctx.arc(x, y, BRUSH_SIZE, 0, Math.PI * 2);
+    ctx.fill();
+    hint.classList.add('hidden');
+  }
+
+  function check() {
+    var d = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+    var t = 0;
+    for (var i = 3; i < d.length; i += 4) if (d[i] < 128) t++;
+    if (t / (d.length / 4) * 100 >= THRESHOLD) reveal();
+  }
+
+  function reveal() {
+    if (done) return;
+    done = true;
+    canvas.classList.add('done');
+    hint.classList.add('hidden');
+  }
+
+  function getPos(e) {
+    var r = canvas.getBoundingClientRect();
+    return { x: e.clientX - r.left, y: e.clientY - r.top };
+  }
+
+  canvas.addEventListener('mousedown',  function(e) { active = true; var p = getPos(e); erase(p.x, p.y); });
+  window.addEventListener('mousemove',  function(e) { if (!active) return; var p = getPos(e); erase(p.x, p.y); check(); });
+  window.addEventListener('mouseup',    function()  { active = false; });
+
+  canvas.addEventListener('touchstart', function(e) { e.preventDefault(); var p = getPos(e.touches[0]); erase(p.x, p.y); },               { passive: false });
+  canvas.addEventListener('touchmove',  function(e) { e.preventDefault(); var p = getPos(e.touches[0]); erase(p.x, p.y); check(); }, { passive: false });
+
+  window.addEventListener('load', init);
+  if (document.readyState === 'complete') init();
+<\/script>
+</body>
+</html>`
+      },
+      {
+        id: 'seed-24',
+        title: 'Shiny Text',
+        category: 'animation',
+        description: 'A glint sweeps across text like light catching metal. Supports yoyo, pause-on-hover, direction, delay, and custom colors.',
+        code: `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script>
+
+  /* ============================================
+     CUSTOMIZE HERE
+     ============================================ */
+
+  const FONT           = 'Plus Jakarta Sans'; // ✏️ Google Font (or blank for system)
+  const HEIGHT         = '220px';             // ✏️ Block height
+  const ALIGN          = 'center';            // ✏️ 'left', 'center', or 'right'
+
+  const TEXT           = 'Course Complete';   // ✏️ Text to display
+  const FONT_SIZE      = '52px';              // ✏️ Font size
+  const FONT_WEIGHT    = '700';               // ✏️ 400 / 600 / 700 / 800
+
+  const COLOR          = '#547792';           // ✏️ Base text color
+  const SHINE_COLOR    = '#FFDAD5';           // ✏️ Glint / shine color
+  const SPREAD         = 120;                 // ✏️ Gradient angle in degrees
+
+  const SPEED          = 2;                   // ✏️ Seconds per animation cycle
+  const DELAY          = 0.5;                 // ✏️ Pause between cycles (seconds)
+  const YOYO           = false;              // ✏️ true = ping-pong back and forth
+  const DIRECTION      = 'left';             // ✏️ 'left' or 'right'
+  const PAUSE_ON_HOVER = true;              // ✏️ true = pause on mouse hover
+  const DISABLED       = false;             // ✏️ true = static, no animation
+
+  /* ============================================ */
+
+  if (FONT) {
+    var _l = document.createElement('link');
+    _l.rel  = 'stylesheet';
+    _l.href = 'https://fonts.googleapis.com/css2?family=' + FONT.replace(/ /g, '+') + ':wght@400;600;700;800&display=swap';
+    document.head.appendChild(_l);
+  }
+
+<\/script>
+<style>
+
+  /* ============================================
+     DO NOT EDIT BELOW THIS LINE
+     ============================================ */
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: transparent;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh; padding: 40px 24px;
+  }
+  .shiny {
+    display: inline-block;
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    cursor: default;
+    line-height: 1.2;
+  }
+
+</style>
+</head>
+<body>
+
+<div style="width:100%;text-align:var(--align)">
+  <span class="shiny" id="el"></span>
+</div>
+
+<script>
+  document.documentElement.style.setProperty('--align', ALIGN);
+
+  var el = document.getElementById('el');
+  el.textContent        = TEXT;
+  el.style.fontFamily   = FONT ? "'" + FONT + "',sans-serif" : 'system-ui,sans-serif';
+  el.style.fontSize     = FONT_SIZE;
+  el.style.fontWeight   = FONT_WEIGHT;
+  el.style.backgroundImage =
+    'linear-gradient(' + SPREAD + 'deg, ' +
+    COLOR + ' 0%, ' + COLOR + ' 35%, ' +
+    SHINE_COLOR + ' 50%, ' +
+    COLOR + ' 65%, ' + COLOR + ' 100%)';
+
+  if (DISABLED) {
+    el.style.backgroundPosition = '150% center';
+  } else {
+    var elapsed  = 0;
+    var lastTime = null;
+    var isPaused = false;
+    var dirSign  = DIRECTION === 'left' ? 1 : -1;
+    var animDur  = SPEED * 1000;
+    var delayDur = DELAY * 1000;
+
+    if (PAUSE_ON_HOVER) {
+      el.addEventListener('mouseenter', function() { isPaused = true;  lastTime = null; });
+      el.addEventListener('mouseleave', function() { isPaused = false; });
+    }
+
+    function tick(time) {
+      if (!isPaused) {
+        if (lastTime !== null) {
+          elapsed += time - lastTime;
+
+          var p;
+          var cycleDur  = animDur + delayDur;
+          var cycleTime;
+
+          if (YOYO) {
+            var fullCycle = cycleDur * 2;
+            cycleTime = elapsed % fullCycle;
+            if      (cycleTime < animDur)             p = (cycleTime / animDur) * 100;
+            else if (cycleTime < cycleDur)            p = 100;
+            else if (cycleTime < cycleDur + animDur)  p = 100 - ((cycleTime - cycleDur) / animDur) * 100;
+            else                                      p = 0;
+          } else {
+            cycleTime = elapsed % cycleDur;
+            p = cycleTime < animDur ? (cycleTime / animDur) * 100 : 100;
+          }
+
+          var ep = dirSign === 1 ? p : 100 - p;
+          el.style.backgroundPosition = (150 - ep * 2).toFixed(2) + '% center';
+        }
+        lastTime = time;
+      } else {
+        lastTime = null;
+      }
+      requestAnimationFrame(tick);
+    }
+
+    requestAnimationFrame(tick);
+  }
+<\/script>
+</body>
+</html>`
+      },
+      {
+        id: 'seed-25',
+        title: 'Curved Loop',
+        category: 'animation',
+        description: 'Text scrolls continuously along a curved SVG path. Drag to scrub — release and it keeps going in that direction.',
+        code: `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script>
+
+  /* ============================================
+     CUSTOMIZE HERE
+     ============================================ */
+
+  const FONT         = 'Plus Jakarta Sans'; // ✏️ Google Font (or blank for system)
+  const HEIGHT       = '140px';             // ✏️ Block height
+
+  const TEXT         = 'Course Complete \u00B7 Well Done \u00B7 Keep Going \u00B7 '; // ✏️ Marquee text — end with a separator + space
+  const FONT_SIZE    = '28';                // ✏️ Font size (SVG units)
+  const FONT_WEIGHT  = '700';              // ✏️ Font weight
+  const TEXT_COLOR   = '#547792';          // ✏️ Text color
+
+  const SPEED        = 1.5;               // ✏️ Scroll speed (px per frame — higher = faster)
+  const CURVE_AMOUNT = 150;              // ✏️ Curve depth: 0 = flat, 300 = deep bow
+  const DIRECTION    = 'left';           // ✏️ 'left' or 'right'
+  const INTERACTIVE  = true;            // ✏️ true = drag to scrub
+
+  /* ============================================ */
+
+  if (FONT) {
+    var _l = document.createElement('link');
+    _l.rel  = 'stylesheet';
+    _l.href = 'https://fonts.googleapis.com/css2?family=' + FONT.replace(/ /g, '+') + ':wght@400;600;700;800&display=swap';
+    document.head.appendChild(_l);
+  }
+
+<\/script>
+<style>
+
+  /* ============================================
+     DO NOT EDIT BELOW THIS LINE
+     ============================================ */
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: transparent;
+    display: flex; align-items: flex-start; justify-content: center;
+    min-height: 100vh; overflow: hidden;
+  }
+  #jacket {
+    width: 100%;
+    overflow: hidden;
+    user-select: none; -webkit-user-select: none;
+    visibility: hidden;
+  }
+  #svg {
+    width: 100%; height: auto;
+    display: block; overflow: visible;
+  }
+
+</style>
+</head>
+<body>
+
+<div id="jacket">
+  <svg id="svg" viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <path id="curvepath" fill="none" stroke="none"/>
+    </defs>
+    <text id="measure" xml:space="preserve"
+      style="visibility:hidden;opacity:0;pointer-events:none"></text>
+    <text id="marquee" xml:space="preserve"></text>
+  </svg>
+</div>
+
+<script>
+  var jacket     = document.getElementById('jacket');
+  var svg        = document.getElementById('svg');
+  var measure    = document.getElementById('measure');
+  var curvepath  = document.getElementById('curvepath');
+  var marqueeEl  = document.getElementById('marquee');
+
+  jacket.style.height = HEIGHT;
+  curvepath.setAttribute('d', 'M-100,40 Q500,' + (40 + CURVE_AMOUNT) + ' 1540,40');
+
+  var fontFamily = FONT ? "'" + FONT + "',sans-serif" : 'system-ui,sans-serif';
+  function applyStyle(el) {
+    el.setAttribute('font-size',   FONT_SIZE);
+    el.setAttribute('font-weight', FONT_WEIGHT);
+    el.setAttribute('fill',        TEXT_COLOR);
+    el.style.fontFamily = fontFamily;
+  }
+  applyStyle(measure);
+  applyStyle(marqueeEl);
+
+  var text = TEXT.replace(/\s+$/, '') + '\u00A0';
+  measure.textContent = text;
+
+  var tp = document.createElementNS('http://www.w3.org/2000/svg', 'textPath');
+  tp.setAttribute('href', '#curvepath');
+  tp.setAttribute('startOffset', '0px');
+  tp.setAttribute('xml:space', 'preserve');
+  marqueeEl.appendChild(tp);
+
+  function init() {
+    var spacing = measure.getComputedTextLength();
+    if (!spacing || spacing < 1) {
+      setTimeout(function() { requestAnimationFrame(init); }, 100);
+      return;
+    }
+
+    tp.textContent = Array(Math.ceil(1800 / spacing) + 2).fill(text).join('');
+
+    var offset    = -spacing;
+    var dirSign   = DIRECTION === 'left' ? -1 : 1;
+    var isDragging = false;
+    var lastX = 0, velocity = 0;
+
+    tp.setAttribute('startOffset', offset + 'px');
+    jacket.style.visibility = 'visible';
+
+    function step() {
+      if (!isDragging) {
+        offset += SPEED * dirSign;
+        if (offset <= -spacing) offset += spacing;
+        if (offset > 0)         offset -= spacing;
+        tp.setAttribute('startOffset', offset + 'px');
+      }
+      requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+
+    if (INTERACTIVE) {
+      svg.style.cursor = 'grab';
+
+      svg.addEventListener('pointerdown', function(e) {
+        isDragging = true; lastX = e.clientX; velocity = 0;
+        svg.style.cursor = 'grabbing';
+        svg.setPointerCapture(e.pointerId);
+      });
+
+      svg.addEventListener('pointermove', function(e) {
+        if (!isDragging) return;
+        var dx = e.clientX - lastX;
+        lastX = e.clientX; velocity = dx;
+        offset += dx;
+        if (offset <= -spacing) offset += spacing;
+        if (offset > 0)         offset -= spacing;
+        tp.setAttribute('startOffset', offset + 'px');
+      });
+
+      function endDrag() {
+        if (!isDragging) return;
+        isDragging = false;
+        svg.style.cursor = 'grab';
+        if (velocity !== 0) dirSign = velocity > 0 ? 1 : -1;
+      }
+      svg.addEventListener('pointerup',    endDrag);
+      svg.addEventListener('pointerleave', endDrag);
+    }
+  }
+
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(init);
+<\/script>
+</body>
+</html>`
+      },
+      {
+        id: 'seed-26',
+        title: 'Variable Proximity',
+        category: 'interaction',
+        description: 'Letters morph along variable font axes as the cursor approaches — weight, width, slant and more. Requires a variable font.',
+        code: `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script>
+
+  /* ============================================
+     CUSTOMIZE HERE
+     ============================================ */
+
+  const FONT          = 'Roboto Flex';  // ✏️ Must be a variable Google Font
+  const HEIGHT        = '220px';        // ✏️ Block height
+  const ALIGN         = 'center';       // ✏️ 'left', 'center', or 'right'
+
+  const TEXT          = 'Hover over me';  // ✏️ Text to display
+  const FONT_SIZE     = '64px';           // ✏️ Font size
+  const TEXT_COLOR    = '#547792';        // ✏️ Text color
+
+  // Font variation settings — use any axes your chosen font supports
+  // Roboto Flex supports: wght (100–900), wdth (25–151), opsz (8–144), etc.
+  const FROM_SETTINGS = "'wght' 100";     // ✏️ State when cursor is far away
+  const TO_SETTINGS   = "'wght' 900";     // ✏️ State when cursor is closest
+
+  const RADIUS        = 120;              // ✏️ Influence radius in px
+  const FALLOFF       = 'linear';        // ✏️ 'linear', 'exponential', or 'gaussian'
+
+  /* ============================================ */
+
+  if (FONT) {
+    var _l = document.createElement('link');
+    _l.rel  = 'stylesheet';
+    _l.href = 'https://fonts.googleapis.com/css2?family=' + FONT.replace(/ /g, '+') + ':wght@100..900&display=swap';
+    document.head.appendChild(_l);
+  }
+
+<\/script>
+<style>
+
+  /* ============================================
+     DO NOT EDIT BELOW THIS LINE
+     ============================================ */
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: transparent;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh; padding: 32px 24px;
+  }
+  #container {
+    width: 100%;
+    line-height: 1.2;
+    cursor: default;
+  }
+  .word   { display: inline-block; white-space: nowrap; }
+  .letter { display: inline-block; }
+
+</style>
+</head>
+<body>
+
+<div id="container"></div>
+
+<script>
+  var container = document.getElementById('container');
+  container.style.textAlign  = ALIGN;
+  container.style.fontSize   = FONT_SIZE;
+  container.style.color      = TEXT_COLOR;
+  container.style.fontFamily = FONT ? "'" + FONT + "',sans-serif" : 'system-ui,sans-serif';
+
+  // Parse "\'wght\' 100, \'wdth\' 150" → [{ axis, value }, ...]
+  function parseSettings(str) {
+    return str.split(',').map(function(s) {
+      var m = s.trim().match(/'?(\w+)'?\s+([\d.-]+)/);
+      return m ? { axis: m[1], value: parseFloat(m[2]) } : null;
+    }).filter(Boolean);
+  }
+
+  var fromParsed = parseSettings(FROM_SETTINGS);
+  var toParsed   = parseSettings(TO_SETTINGS);
+  var axes = {};
+  fromParsed.forEach(function(f) {
+    var t = toParsed.find(function(x) { return x.axis === f.axis; });
+    axes[f.axis] = { from: f.value, to: t ? t.value : f.value };
+  });
+
+  // Build letter spans
+  var letterEls = [];
+  TEXT.split(' ').forEach(function(word, wi, arr) {
+    var wordSpan = document.createElement('span');
+    wordSpan.className = 'word';
+    word.split('').forEach(function(char) {
+      var span = document.createElement('span');
+      span.className = 'letter';
+      span.textContent = char;
+      span.style.fontVariationSettings = FROM_SETTINGS;
+      wordSpan.appendChild(span);
+      letterEls.push(span);
+    });
+    container.appendChild(wordSpan);
+    if (wi < arr.length - 1) {
+      var sp = document.createElement('span');
+      sp.style.display = 'inline-block';
+      sp.innerHTML = '&nbsp;';
+      container.appendChild(sp);
+    }
+  });
+
+  // Mouse / touch tracking (relative to container)
+  var mouseX = -9999, mouseY = -9999;
+  window.addEventListener('mousemove', function(e) {
+    var r = container.getBoundingClientRect();
+    mouseX = e.clientX - r.left;
+    mouseY = e.clientY - r.top;
+  });
+  window.addEventListener('touchmove', function(e) {
+    var t = e.touches[0], r = container.getBoundingClientRect();
+    mouseX = t.clientX - r.left;
+    mouseY = t.clientY - r.top;
+  }, { passive: true });
+
+  // Falloff modes
+  function calcFalloff(dist) {
+    if (FALLOFF === 'exponential') {
+      var n = Math.min(Math.max(1 - dist / RADIUS, 0), 1);
+      return n * n;
+    }
+    if (FALLOFF === 'gaussian') {
+      return Math.exp(-Math.pow(dist / (RADIUS / 2), 2) / 2);
+    }
+    return Math.min(Math.max(1 - dist / RADIUS, 0), 1); // linear
+  }
+
+  // rAF loop
+  var lastX = null, lastY = null;
+  function loop() {
+    if (mouseX !== lastX || mouseY !== lastY) {
+      lastX = mouseX; lastY = mouseY;
+      var cRect = container.getBoundingClientRect();
+      letterEls.forEach(function(el) {
+        var r  = el.getBoundingClientRect();
+        var cx = r.left + r.width  / 2 - cRect.left;
+        var cy = r.top  + r.height / 2 - cRect.top;
+        var dist = Math.sqrt((mouseX - cx) * (mouseX - cx) + (mouseY - cy) * (mouseY - cy));
+        var t  = dist >= RADIUS ? 0 : calcFalloff(dist);
+        if (t === 0) {
+          el.style.fontVariationSettings = FROM_SETTINGS;
+        } else {
+          el.style.fontVariationSettings = Object.keys(axes).map(function(axis) {
+            var a = axes[axis];
+            return "'" + axis + "' " + (a.from + (a.to - a.from) * t).toFixed(2);
+          }).join(', ');
+        }
+      });
+    }
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+<\/script>
+</body>
+</html>`
+      }
+    ];
+
+    const blocks = SEED_BLOCKS;
+    let activeFilter = 'all';
+    let searchQuery = '';
+    let currentCode = '';
+
+    // ── RENDER ────────────────────────────────────────────────────────────────
+    function render() {
+      const grid = document.getElementById('grid');
+      const filtered = blocks.filter(b => {
+        const matchesFilter = activeFilter === 'all' || b.category === activeFilter;
+        const matchesSearch = !searchQuery ||
+          b.title.toLowerCase().includes(searchQuery) ||
+          (b.description && b.description.toLowerCase().includes(searchQuery));
+        return matchesFilter && matchesSearch;
+      });
+
+      document.getElementById('badge-count').textContent =
+        blocks.length + (blocks.length === 1 ? ' block' : ' blocks');
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-icon">🎨</div>
+            <p>No blocks match your search.<br>Try a different keyword or filter.</p>
+          </div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(b => `
+        <div class="card" onclick="openViewModal('${escJs(b.id)}')">
+          <div class="card-preview">
+            <iframe srcdoc="${escHtml(b.code)}" title="${escHtml(b.title)}"></iframe>
+            <div class="preview-overlay">
+              <button class="preview-btn">Preview &amp; Code</button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-header-row">
+              <span class="card-title">${escHtml(b.title)}</span>
+              <span class="cat-chip cat-${b.category}">${capitalize(b.category)}</span>
+            </div>
+            ${b.description ? `<p class="card-desc">${escHtml(b.description)}</p>` : ''}
+            <div class="card-footer">
+              <button class="view-btn">View Code <svg width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4.5M9.5 2.5V7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function escHtml(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+    // Escape a string for safe insertion into a JS string inside an HTML attribute (onclick="...")
+    function escJs(str) {
+      return str.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"');
+    }
+    function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+
+    // ── SEARCH ────────────────────────────────────────────────────────────────
+    document.getElementById('search-input').addEventListener('input', e => {
+      searchQuery = e.target.value.toLowerCase().trim();
+      render();
+    });
+
+    // ── FILTERS ───────────────────────────────────────────────────────────────
+    document.getElementById('filter-bar').addEventListener('click', e => {
+      const chip = e.target.closest('.chip');
+      if (!chip) return;
+      document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeFilter = chip.dataset.filter;
+      render();
+    });
+
+    // ── VIEW MODAL ────────────────────────────────────────────────────────────
+    function openViewModal(id) {
+      const block = blocks.find(b => b.id === id);
+      if (!block) return;
+      document.getElementById('modal-title').textContent = block.title;
+      document.getElementById('modal-iframe').srcdoc = block.code;
+      document.getElementById('modal-code').textContent = block.code;
+      currentCode = block.code;
+      const instrEl = document.getElementById('tab-instructions');
+      if (block.instructions && block.instructions.length) {
+        instrEl.innerHTML = block.instructions.map(s => `
+          <div class="instr-section">
+            <div class="instr-title">${escHtml(s.title)}</div>
+            ${s.desc ? `<div class="instr-desc">${s.desc}</div>` : ''}
+            ${s.example ? `<div class="instr-example"><code>${s.example}</code></div>` : ''}
+          </div>`).join('');
+      } else {
+        instrEl.innerHTML = `
+          <div class="instr-section">
+            <div class="instr-title">Bold text</div>
+            <div class="instr-desc">Wrap any word or phrase with <code>&lt;strong&gt;</code> tags.</div>
+            <div class="instr-example"><code>&lt;strong&gt;your text&lt;/strong&gt;</code></div>
+          </div>
+          <div class="instr-section">
+            <div class="instr-title">Bullet points</div>
+            <div class="instr-desc">Use <code>&lt;ul&gt;</code> for the list and <code>&lt;li&gt;</code> for each item.</div>
+            <div class="instr-example"><code>&lt;ul&gt;&lt;li&gt;First point&lt;/li&gt;&lt;li&gt;Second point&lt;/li&gt;&lt;/ul&gt;</code></div>
+          </div>`;
+      }
+      switchTab('code');
+      openModal('view-modal');
+    }
+
+    function switchTab(tab) {
+      const isCode = tab === 'code';
+      document.getElementById('tab-code').style.display = isCode ? '' : 'none';
+      document.getElementById('tab-instructions').classList.toggle('visible', !isCode);
+      document.getElementById('copy-btn').style.display = isCode ? '' : 'none';
+      document.querySelectorAll('.modal-tab').forEach((t, i) =>
+        t.classList.toggle('active', (i === 0) === isCode));
+    }
+
+    function copyCode() {
+      navigator.clipboard.writeText(currentCode).then(() => {
+        const btn = document.getElementById('copy-btn');
+        btn.innerHTML = '<span class="copy-success">✓ Copied!</span>';
+        setTimeout(() => { btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><rect x="9" y="9" width="13" height="13" rx="2" stroke="currentColor" stroke-width="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Copy Code'; }, 2000);
+      });
+    }
+
+    // ── MODAL HELPERS ─────────────────────────────────────────────────────────
+    function openModal(id) { document.getElementById(id).classList.add('open'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+    function handleBackdropClick(e, id) {
+      if (e.target.id === id) closeModal(id);
+    }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeModal('view-modal');
+    });
+
+    // ── INIT ──────────────────────────────────────────────────────────────────
+    render();
+  </script>
+</body>
+</html>
